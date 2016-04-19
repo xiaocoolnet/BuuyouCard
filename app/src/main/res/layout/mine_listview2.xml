@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300px"
+        android:background="#ffffff"
+        >
+        <ImageView
+            android:layout_width="180px"
+            android:layout_height="180px"
+            android:src="@drawable/shiliangzhineng"
+            android:id="@+id/touxiang"
+            android:layout_marginTop="50px"
+            android:layout_marginLeft="465px"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置"
+            android:id="@+id/seting"
+            android:layout_marginLeft="860px"
+            android:layout_marginTop="10px"
+            android:textColor="#57C77E"
+            android:textSize="20dp"
+
+            />
+        <ImageView
+            android:layout_width="30px"
+            android:layout_height="30px"
+            android:src="@drawable/right"
+            android:layout_toRightOf="@id/seting"
+            android:layout_marginLeft="10px"
+            android:layout_marginTop="30px"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_user"
+            android:layout_alignParentBottom="true"
+            android:layout_alignBottom="@+id/touxiang"
+            android:layout_marginBottom="5px"
+            android:layout_marginLeft="490px"
+            android:textColor="#000000"
+            android:textSize="15dp"
+
+            />
+
+    </RelativeLayout>
+</LinearLayout>

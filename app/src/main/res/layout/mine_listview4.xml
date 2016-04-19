@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:orientation="horizontal"
+
+        >
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="100px"
+            android:text="微校通服务明细"
+            android:gravity="center"
+            android:textColor="#57C77E"
+            android:textSize="18dp"
+            android:background="#FFFFFF"/>
+        <ImageView
+            android:layout_width="2px"
+            android:layout_height="100px"
+            android:src="@drawable/xingzhuang2"/>
+        <TextView
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="100px"
+            android:text="支付微校通服务费用"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:textColor="#57C77E"
+            android:background="#FFFFFF"/>
+
+    </LinearLayout>
+</LinearLayout>

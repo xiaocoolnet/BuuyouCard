@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+    package="com.buuyou.buuyoucard">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+
+
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+
+        android:label="布优点卡"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.buuyou.main.Mylogin">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.buuyou.main.findpassword"></activity>
+        <activity android:name="com.buuyou.fragment.BlankFragment"></activity>
+        <activity android:name="com.buuyou.MineSbu.AccountInfo"></activity>
+        <activity android:name="com.buuyou.MineSbu.BasicInfo"></activity>
+        <activity android:name="com.buuyou.MineSbu.ExchangeEmail"></activity>
+        <activity android:name="com.buuyou.MineSbu.ExchangePhone"></activity>
+        <activity android:name="com.buuyou.MineSbu.SecurityCen"></activity>
+        <activity android:name="com.buuyou.MineSbu.Authentication"></activity>
+        <activity android:name="com.buuyou.MineSbu.ChangeSn"></activity>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+
+    </application>
+
+</manifest>
