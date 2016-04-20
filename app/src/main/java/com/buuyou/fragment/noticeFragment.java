@@ -14,7 +14,7 @@ import com.buuyou.buuyoucard.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link noticeFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link noticeFragment#newInstance} factory method to
  * create an instance of this fragment.

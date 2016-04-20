@@ -24,7 +24,7 @@ import com.buuyou.main.findpassword;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link mineFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link mineFragment#newInstance} factory method to
  * create an instance of this fragment.
