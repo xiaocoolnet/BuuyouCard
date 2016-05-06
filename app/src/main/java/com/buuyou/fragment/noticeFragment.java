@@ -2,13 +2,30 @@ package com.buuyou.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.buuyou.HttpConnect.myHttpConnect;
 import com.buuyou.buuyoucard.R;
+import com.buuyou.imageload.MyApplication;
+import com.buuyou.main.Watchdetail;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 
 /**
@@ -28,8 +45,55 @@ public class noticeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String path;
 
+    private TextView date,title;
+    private ImageView pic;
+    private RelativeLayout next;
+    private String data_result;
     private OnFragmentInteractionListener mListener;
+Handler handler=new Handler(){
+    public void handleMessage(Message msg){
+        switch (msg.what){
+            case 1:
+                Toast.makeText(getActivity().getApplication(),"网络连接错误",Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+                try {
+
+                    JSONObject json = new JSONObject(data_result);
+                    String status=json.getString("status");
+                    SharedPreferences sp=getActivity().getSharedPreferences("data", Context.MODE_PRIVATE);
+
+                    if(status.equals("1")){
+                        JSONArray data=json.getJSONArray("data");
+                        for(int i=0;i<data.length();i++) {
+                            JSONObject temp = (JSONObject) data.get(i);
+                            date.setText(temp.getString("datatime"));
+                            title.setText(temp.getString("title"));
+                            String picpath = temp.getString("picpath");
+                            String web = temp.getString("website");
+                            path = web + picpath;
+                            SharedPreferences.Editor editor = sp.edit();
+                            editor.putString("noticeweb", web);
+                            editor.commit();
+                            Log.e("+++", path);
+                            /**
+                             * 通过imageloader加载网络上的图片
+                             */
+                            //不加这一句会提示：ImageLoader must be init with configuration before 且不显示图片
+                            MyApplication.imageLoader.init(ImageLoaderConfiguration.createDefault(getActivity()));
+                            ImageLoader.getInstance().displayImage(path, pic);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+
+        }
+    }
+};
 
     public noticeFragment() {
         // Required empty public constructor
@@ -66,7 +130,35 @@ public class noticeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notice, container, false);
+        View view=inflater.inflate(R.layout.fragment_notice, container, false);
+        final String email,password;
+        title= (TextView) view.findViewById(R.id.tv_fragmentnotice_title);
+        date= (TextView) view.findViewById(R.id.tv_fragmentnotice_date);
+        pic= (ImageView) view.findViewById(R.id.iv_fragmentnotice_pic);
+        next= (RelativeLayout) view.findViewById(R.id.rlayout_fragmentnotice_next);
+        SharedPreferences sp=getActivity().getSharedPreferences("data",Context.MODE_PRIVATE);
+        email=sp.getString("email",null);
+        password=sp.getString("clearpwd",null);
+        new Thread(){
+            public void run(){
+                if(myHttpConnect.isConnnected(getActivity().getApplication())){
+                    data_result=myHttpConnect.urlconnect_notice(email,password);
+                    handler.sendEmptyMessage(2);
+                }else{
+                    handler.sendEmptyMessage(1);
+                }
+            }
+        }.start();
+        next.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getActivity().getApplication(), Watchdetail.class);
+            startActivity(intent);
+        }
+    });
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

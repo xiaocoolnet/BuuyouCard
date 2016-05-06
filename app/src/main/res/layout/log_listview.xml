@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="61dp"
+    android:background="#ffffff"
+    android:layout_marginTop="1dp"
+   >
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="34dp"
+        android:layout_height="30dp"
+        android:src="@mipmap/computer"
+        android:layout_marginLeft="15dp"
+       android:layout_centerVertical="true"
+        />
+    <TextView
+        android:layout_marginTop="7dp"
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/img"
+        android:textSize="15sp"
+        android:text="山东省烟台市"
+        android:layout_marginLeft="21dp"
+        android:textColor="#303030"
+        />
+    <TextView
+        android:id="@+id/time"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/img"
+        android:textSize="11sp"
+        android:text="04-07 12:00"
+        android:layout_marginLeft="21dp"
+        android:textColor="#646464"
+        />
+    <TextView
+        android:id="@+id/ip"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:textSize="11sp"
+        android:text="197.168.1.1"
+
+        android:textColor="#646464"
+        />
+
+</RelativeLayout>

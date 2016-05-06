@@ -73,7 +73,7 @@
             android:layout_height="match_parent"
             android:hint="@string/pass"
             android:inputType="textPassword"
-           android:background="@drawable/shape"
+            android:background="@drawable/shape"
             android:padding="10dp"
             />
 

@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.buuyou.HttpConnect.myHttpConect;
+import com.buuyou.HttpConnect.myHttpConnect;
 import com.buuyou.buuyoucard.R;
 import com.buuyou.fragment.BlankFragment;
 
@@ -68,6 +68,8 @@ public class Mylogin extends AppCompatActivity {
                                 editor.putString("phone",userphone);
                                 editor.putString("QQ",userQQ);
                                 editor.putString("safecode",safeCode);
+                                //记录用户输入的明文密码
+                                editor.putString("clearpwd",pass.getText().toString());
                                 editor.commit();
                             }
                             finish();
@@ -88,7 +90,7 @@ public class Mylogin extends AppCompatActivity {
             }
         }
 
-        ;
+
 
     };
 
@@ -140,9 +142,9 @@ public class Mylogin extends AppCompatActivity {
 
                         } else {
                             //连接数据库，解析数据
-                            if (myHttpConect.isConnnected(getApplication())) {
+                            if (myHttpConnect.isConnnected(getApplication())) {
                                 //如果网络连接，调用myHttpConect的urlconnect方法
-                                result_data = myHttpConect.urlconnect(myphone, mypass);
+                                result_data = myHttpConnect.urlconnect(myphone, mypass);
                                 handler.sendEmptyMessage(3);
 
                             } else {
@@ -158,7 +160,7 @@ public class Mylogin extends AppCompatActivity {
         findpassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Mylogin.this, findpassword.class);
+                Intent intent = new Intent(Mylogin.this, Findpassword.class);
                 startActivity(intent);
             }
         });

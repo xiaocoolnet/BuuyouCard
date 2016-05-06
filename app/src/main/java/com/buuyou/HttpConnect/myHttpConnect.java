@@ -14,7 +14,7 @@ import java.net.URL;
 /**
  * Created by Administrator on 2016/4/6.
  */
-public class myHttpConect {
+public class myHttpConnect {
 
     public static boolean isConnnected(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -32,7 +32,7 @@ public class myHttpConect {
         }
         return false;
     }
-//传递URL
+//登录
     public static String urlconnect(String myphone, String mypass) {
 
         String url=UrlPath.NET_API+UrlPath.loginType+UrlPath.data+myphone+","+mypass;
@@ -46,14 +46,42 @@ public class myHttpConect {
         String urlresult=HttpResult(url);
         return urlresult;
     }
-    //根据验证码码登录后台
+    //根据验证码更改密码
     public static String urlconnect_updapass(String email, String valiCode,String newpassword,String valistr) {
 
         String url=UrlPath.NET_API+UrlPath.updatapassType+UrlPath.data+email+","+valiCode+","+newpassword+","+2+","+valistr;
         String urlresult=HttpResult(url);
         return urlresult;
     }
+    //根据原密码更改密码
+    public static String urlconnect_changepass(String email, String oldpassword,String newpassword) {
 
+        String url=UrlPath.NET_API+UrlPath.updatapassType+UrlPath.data+email+","+oldpassword+","+newpassword+","+1;
+        String urlresult=HttpResult(url);
+        Log.e("changepwd:",urlresult);
+        return urlresult;
+    }
+    //通道费率
+    public static String urlconnect_channelrate(String email,String password){
+        String url=UrlPath.NET_API+UrlPath.channelrateType+UrlPath.data+email+","+password;
+        String urlresult=HttpResult(url);
+        Log.e("channel:",urlresult);
+        return urlresult;
+    }
+    //登录日志
+    public static String urlconnect_loginlog(String email,String password){
+        String url=UrlPath.NET_API+UrlPath.loginlogType+UrlPath.data+email+","+password+","+10+","+1;
+        String urlresult=HttpResult(url);
+        Log.e("log:",urlresult);
+        return urlresult;
+    }
+    //通知公告
+    public static String urlconnect_notice(String email,String password){
+        String url=UrlPath.NET_API+UrlPath.noticeType+UrlPath.data+email+","+password;
+        String urlresult=HttpResult(url);
+        Log.e("log:",urlresult);
+        return urlresult;
+    }
 
 //连接服务器
     public static String HttpResult(String url) {

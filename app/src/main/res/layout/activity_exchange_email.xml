@@ -26,8 +26,7 @@
             android:textSize="18sp"
             android:textColor="#FFFFFF"
             android:id="@+id/tv_basicinfo_title"
-            android:layout_toRightOf="@+id/iv_findpassword_back"
-            android:layout_marginTop="14dp"
+            android:layout_toRightOf="@+id/iv_changeemail_back"           android:layout_marginTop="14dp"
             android:layout_marginLeft="20dp"
             />
     </RelativeLayout>

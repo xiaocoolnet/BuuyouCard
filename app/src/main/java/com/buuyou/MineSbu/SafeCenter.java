@@ -8,11 +8,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.buuyou.buuyoucard.R;
 
-public class SecurityCen extends AppCompatActivity implements View.OnClickListener {
+public class SafeCenter extends AppCompatActivity implements View.OnClickListener {
    private EditText safecode,email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,19 +45,19 @@ public class SecurityCen extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.safenum :
-                Intent intent=new Intent(SecurityCen.this,ChangeSn.class);
+                Intent intent=new Intent(SafeCenter.this,ChangeSafeCode.class);
                 startActivity(intent);
             break;
             case R.id.safeemail :
-                Intent intent2=new Intent(SecurityCen.this,ExchangeEmail.class);
+                Intent intent2=new Intent(SafeCenter.this,ExchangeEmail.class);
                 startActivity(intent2);
                 break;
             case R.id.safephone :
-                Intent intent3=new Intent(SecurityCen.this,ExchangePhone.class);
+                Intent intent3=new Intent(SafeCenter.this,ExchangePhone.class);
                 startActivity(intent3);
                 break;
             case R.id.myidentity :
-                Intent intent4=new Intent(SecurityCen.this,Authentication.class);
+                Intent intent4=new Intent(SafeCenter.this,Authentication.class);
                 startActivity(intent4);
                 break;
             case R.id.iv_security_back:

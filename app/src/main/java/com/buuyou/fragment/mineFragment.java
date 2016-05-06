@@ -14,12 +14,16 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.buuyou.MineSbu.AboutBuu;
 import com.buuyou.MineSbu.AccountInfo;
 import com.buuyou.MineSbu.BasicInfo;
-import com.buuyou.MineSbu.SecurityCen;
+import com.buuyou.MineSbu.ChannelRate;
+import com.buuyou.MineSbu.LoginLog;
+import com.buuyou.MineSbu.SafeCenter;
+import com.buuyou.MineSbu.Updata;
 import com.buuyou.buuyoucard.R;
 import com.buuyou.main.Mylogin;
-import com.buuyou.main.findpassword;
+import com.buuyou.MineSbu.Changepassword;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,7 +38,7 @@ public class mineFragment extends Fragment implements View.OnClickListener {
     EditText et_fragmentmine_pwd;
     Button exit;
     SharedPreferences sp;
-    LinearLayout basicinfo,accountinfo,safecenter,changepwd;
+    LinearLayout basicinfo,accountinfo,safecenter,changepwd,loginlog,channelrate,about,versionupdate;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -90,6 +94,10 @@ public class mineFragment extends Fragment implements View.OnClickListener {
         accountinfo= (LinearLayout) view.findViewById(R.id.llayout_fragmentmine_accountinfo);
         safecenter= (LinearLayout) view.findViewById(R.id.llayout_fragmentmine_safecenter);
         changepwd= (LinearLayout) view.findViewById(R.id.llayout_fragmentmine_changepwd);
+        loginlog= (LinearLayout) view.findViewById(R.id.llayout_fragmentmine_loginlog);
+        channelrate= (LinearLayout) view.findViewById(R.id.llayout_fragmentmine_channelRate);
+        about= (LinearLayout) view.findViewById(R.id.llayout_fragmentmine_about);
+        versionupdate= (LinearLayout) view.findViewById(R.id.llayout_fragmentmine_versionupdate);
         exit=(Button)view.findViewById(R.id.exit);
         tv_fragmentmine_id.setText("ID:"+sp.getString("email",null));
         et_fragmentmine_pwd.setText(sp.getString("password", null));
@@ -98,6 +106,10 @@ public class mineFragment extends Fragment implements View.OnClickListener {
         accountinfo.setOnClickListener(this);
         safecenter.setOnClickListener(this);
         changepwd.setOnClickListener(this);
+        loginlog.setOnClickListener(this);
+        channelrate.setOnClickListener(this);
+        about.setOnClickListener(this);
+        versionupdate.setOnClickListener(this);
         exit.setOnClickListener(this);
         return view;
     }
@@ -151,19 +163,35 @@ public class mineFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent2);
                 break;
             case R.id.llayout_fragmentmine_safecenter:
-                Intent intent3 = new Intent(getActivity().getApplication(), SecurityCen.class);
+                Intent intent3 = new Intent(getActivity().getApplication(), SafeCenter.class);
                 startActivity(intent3);
                 break;
             case R.id.llayout_fragmentmine_changepwd:
-                Intent intent4 = new Intent(getActivity().getApplication(), findpassword.class);
+                Intent intent4 = new Intent(getActivity().getApplication(),Changepassword.class);
                 startActivity(intent4);
+                break;
+            case R.id.llayout_fragmentmine_loginlog:
+                Intent intent5 = new Intent(getActivity().getApplication(), LoginLog.class);
+                startActivity(intent5);
+                break;
+            case R.id.llayout_fragmentmine_channelRate:
+                Intent intent6 = new Intent(getActivity().getApplication(), ChannelRate.class);
+                startActivity(intent6);
+                break;
+            case R.id.llayout_fragmentmine_about:
+                Intent intent7 = new Intent(getActivity().getApplication(), AboutBuu.class);
+                startActivity(intent7);
+                break;
+            case R.id.llayout_fragmentmine_versionupdate:
+                Intent intent8 = new Intent(getActivity().getApplication(), Updata.class);
+                startActivity(intent8);
                 break;
             case R.id.exit:
                 final SharedPreferences.Editor editor=sp.edit();
                 editor.putBoolean("isboolean", true);
                 editor.commit();
-                Intent intent5=new Intent(getActivity().getApplication(), Mylogin.class);
-                startActivity(intent5);
+                Intent intent9=new Intent(getActivity().getApplication(), Mylogin.class);
+                startActivity(intent9);
                 mineFragment.this.getActivity().finish();
                 break;
 

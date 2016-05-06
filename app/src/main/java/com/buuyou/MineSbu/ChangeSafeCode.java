@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.buuyou.buuyoucard.R;
 
-public class ChangeSn extends AppCompatActivity {
+public class ChangeSafeCode extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

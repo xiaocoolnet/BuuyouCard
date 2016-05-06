@@ -3,8 +3,10 @@
     package="com.buuyou.buuyoucard">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,16 +20,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.buuyou.main.findpassword" />
+        <activity android:name="com.buuyou.main.Findpassword" />
         <activity android:name="com.buuyou.fragment.BlankFragment" />
         <activity android:name="com.buuyou.MineSbu.BasicInfo" />
         <activity android:name="com.buuyou.MineSbu.ExchangeEmail" />
         <activity android:name="com.buuyou.MineSbu.ExchangePhone" />
         <activity android:name="com.buuyou.MineSbu.AccountInfo" />
-        <activity android:name="com.buuyou.MineSbu.SecurityCen" />
-        <activity android:name="com.buuyou.MineSbu.ChangeSn" />
+        <activity android:name="com.buuyou.MineSbu.SafeCenter" />
+        <activity android:name="com.buuyou.MineSbu.ChangeSafeCode" />
         <activity android:name="com.buuyou.MineSbu.Authentication" />
-        <!--<activity android:name="com.buuyou.MineSbu.LoginLog"></activity>-->
+        <activity android:name="com.buuyou.MineSbu.LoginLog" />
+        <activity android:name="com.buuyou.MineSbu.AboutBuu" />
+        <activity android:name="com.buuyou.MineSbu.ChannelRate" />
+        <activity android:name="com.buuyou.MineSbu.Updata" />
+        <activity android:name="com.buuyou.MineSbu.Changepassword" />
+        <activity android:name="com.buuyou.main.Watchdetail" />
+        <activity android:name="com.buuyou.firstpageson.Businessinfo" />
+        <activity android:name="com.buuyou.firstpageson.Shortcut" />
+        <activity android:name="com.buuyou.firstpageson.ConsignmentCard"></activity>
     </application>
 
 </manifest>

@@ -8,14 +8,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.buuyou.HttpConnect.myHttpConect;
+import com.buuyou.HttpConnect.myHttpConnect;
 import com.buuyou.buuyoucard.R;
 
 import org.json.JSONException;
@@ -23,7 +22,7 @@ import org.json.JSONObject;
 
 import java.util.Timer;
 
-public class findpassword extends AppCompatActivity {
+public class Findpassword extends AppCompatActivity {
     EditText email,phone, valiCode,newpass;
     private Button bt_next;
     private Button bt_yanzhengma;
@@ -56,11 +55,11 @@ public class findpassword extends AppCompatActivity {
                             SharedPreferences.Editor editor=sp.edit();
                             editor.putBoolean("isboolean", true);
                             editor.commit();
-                            Toast.makeText(findpassword.this,"密码修改成功",Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent(findpassword.this, Mylogin.class);
+                            Toast.makeText(Findpassword.this,"密码修改成功",Toast.LENGTH_SHORT).show();
+                            Intent intent=new Intent(Findpassword.this, Mylogin.class);
                             startActivity(intent);
                         }else if(status.equals("0")){
-                            Toast.makeText(findpassword.this,"修改密码失败",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Findpassword.this,"修改密码失败",Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -78,10 +77,10 @@ public class findpassword extends AppCompatActivity {
                     }
                     break;
                 case 4:
-                    Toast.makeText(findpassword.this,"网络错误，请稍后重试！",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Findpassword.this,"网络错误，请稍后重试！",Toast.LENGTH_SHORT).show();
                     break;
                 case 5:
-                    Toast.makeText(findpassword.this,"邮箱和手机号不能为空！",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Findpassword.this,"邮箱和手机号不能为空！",Toast.LENGTH_SHORT).show();
                     break;
 
             }
@@ -112,7 +111,7 @@ public class findpassword extends AppCompatActivity {
                         myvaliCode = valiCode.getText().toString().trim();
                         myemail = email.getText().toString().trim();
                         mynewpass=newpass.getText().toString().trim();
-                        result = myHttpConect.urlconnect_updapass(myemail, myvaliCode, mynewpass, getdata);
+                        result = myHttpConnect.urlconnect_updapass(myemail, myvaliCode, mynewpass, getdata);
                         handler.sendEmptyMessage(2);
                    }
                 }).start();
@@ -131,10 +130,10 @@ public class findpassword extends AppCompatActivity {
 
                     @Override
                     public void run() {
-                        if(myHttpConect.isConnnected(findpassword.this)){
+                        if(myHttpConnect.isConnnected(Findpassword.this)){
                             myphone = phone.getText().toString().trim();
                             myemail = email.getText().toString().trim();
-                            result_data= myHttpConect.urlconnect_pass(myemail, myphone);
+                            result_data= myHttpConnect.urlconnect_pass(myemail, myphone);
 
                             handler.sendEmptyMessage(3);
                             if (!TextUtils.isEmpty(myphone)&&!TextUtils.isEmpty(myemail)) {

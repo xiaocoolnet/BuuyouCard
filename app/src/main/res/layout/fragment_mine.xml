@@ -109,7 +109,7 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@mipmap/safecenter"
+                android:src="@mipmap/basicinfo_blue"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"/>
             <TextView
@@ -131,7 +131,7 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@mipmap/safecenter"
+                android:src="@mipmap/accountinfo_blue"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"/>
             <TextView
@@ -186,7 +186,7 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@mipmap/changepwd"
+                android:src="@mipmap/changepwd_green"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"/>
             <TextView
@@ -213,7 +213,8 @@
             android:layout_width="0dp"
             android:layout_height="68dp"
             android:layout_weight="1"
-            android:background="#FFFFFF">
+            android:background="#FFFFFF"
+            android:id="@+id/llayout_fragmentmine_loginlog">
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="22dp"
@@ -234,11 +235,12 @@
             android:layout_height="68dp"
             android:layout_weight="1"
             android:layout_marginLeft="1dp"
-            android:background="#FFFFFF">
+            android:background="#FFFFFF"
+            android:id="@+id/llayout_fragmentmine_channelRate">
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="24dp"
-                android:src="@mipmap/tongdaofei"
+                android:src="@mipmap/channelrate_red"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"/>
             <TextView
@@ -265,7 +267,8 @@
             android:layout_width="0dp"
             android:layout_height="68dp"
             android:layout_weight="1"
-            android:background="#FFFFFF">
+            android:background="#FFFFFF"
+            android:id="@+id/llayout_fragmentmine_about">
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -286,11 +289,12 @@
             android:layout_height="68dp"
             android:layout_weight="1"
             android:layout_marginLeft="1dp"
-            android:background="#FFFFFF">
+            android:background="#FFFFFF"
+            android:id="@+id/llayout_fragmentmine_versionupdate">
             <ImageView
                 android:layout_width="26dp"
                 android:layout_height="26dp"
-                android:src="@mipmap/safecenter"
+                android:src="@mipmap/versionupdate"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"/>
             <TextView
