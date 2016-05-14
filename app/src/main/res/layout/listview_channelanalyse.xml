@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="68dp">
+
+
+    <TextView
+        android:id="@+id/tvlv_channelanalyse_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:text="网银"
+        android:textColor="#303030" />
+
+    <TextView
+        android:id="@+id/tvlv_channelanalyse_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="44dp"
+        android:text="10"
+        android:textColor="#646464"
+        android:textSize="13dp"
+
+        />
+    <TextView
+        android:id="@+id/tvlv_channelanalyse_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tvlv_channelanalyse_num"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="5dp"
+        android:text="成功订单"
+        android:textColor="#646464"
+        android:textSize="11dp"
+
+        />
+
+    <TextView
+        android:id="@+id/tvlv_channelanalyse_contractmoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="14dp"
+        android:text="1000"
+        android:textSize="13dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/tvlv_channelanalyse_contractmoney"
+        android:text="成交金额："
+        android:layout_marginTop="10dp"
+        android:textSize="13dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1000"
+        android:layout_below="@+id/tvlv_channelanalyse_contractmoney"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="17dp"
+        android:layout_marginRight="14dp"
+        android:textSize="13dp"
+        android:id="@+id/tvlv_channelanalyse_dividemoney"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/tvlv_channelanalyse_dividemoney"
+        android:text="分成金额："
+        android:layout_marginTop="42dp"
+        android:textSize="13dp"/>
+</RelativeLayout>

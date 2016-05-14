@@ -8,6 +8,8 @@
     <color name="colorgray">#888888</color>
     <color name="colororange">#FF9100</color>
     <color name="defaultcolor">#757575</color>
+    <color name="failordercolor">#A40000</color>
+    <color name="textcolor64">#646464</color>
 
 
 </resources>

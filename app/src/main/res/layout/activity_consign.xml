@@ -3,9 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   android:orientation="vertical"
-    android:background="#F5F3F0"
-    tools:context="com.buuyou.firstpageson.ConsignmentCard">
+    android:orientation="vertical"
+    tools:context="com.buuyou.firstpageson.consignmentCard.Consign">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -15,7 +14,7 @@
             android:layout_width="18dp"
             android:layout_height="17dp"
             android:src="@mipmap/backarrow"
-            android:id="@+id/iv_businessinfo_back"
+            android:id="@+id/iv_consign_back"
             android:layout_marginLeft="15dp"
             android:layout_centerVertical="true"
             />
@@ -23,7 +22,7 @@
             android:layout_width="1dp"
             android:layout_height="21dp"
             android:background="#D07600"
-            android:layout_toRightOf="@+id/iv_businessinfo_back"
+            android:layout_toRightOf="@+id/iv_consign_back"
             android:layout_marginLeft="10dp"
             android:orientation="vertical"
             android:id="@+id/vertical"
@@ -35,7 +34,7 @@
             android:text="点卡寄售"
             android:textSize="18sp"
             android:textColor="#FFFFFF"
-            android:id="@+id/tv_basicinfo_title"
+            android:id="@+id/tv_consign_title"
             android:layout_toRightOf="@+id/vertical"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
@@ -60,22 +59,22 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/rlayout_consigncard_left">
+            android:id="@+id/rlayout_consign_left">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="点卡寄售"
-                android:textColor="#FF9100"
+                android:textColor="#646464"
                 android:textSize="13dp"
                 android:layout_centerInParent="true"
-                android:id="@+id/tv_consigncard_left"/>
+                android:id="@+id/tv_consign_left"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_alignParentBottom="true"
-                android:background="#FF9100"
+
                 android:orientation="horizontal"
-                android:id="@+id/llayout_consigncard_left"></LinearLayout>
+                android:id="@+id/llayout_consign_left"></LinearLayout>
         </RelativeLayout>
         <LinearLayout
             android:layout_width="1dp"
@@ -86,61 +85,25 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/rlayout_consigncard_right">
+            android:id="@+id/rlayout_consign_right">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="寄售点卡"
+                android:text="寄售订单"
                 android:textColor="#646464"
                 android:textSize="13dp"
                 android:layout_centerInParent="true"
-                android:id="@+id/tv_consigncard_right"/>
+                android:id="@+id/tv_consign_right"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_alignParentBottom="true"
                 android:orientation="horizontal"
-                android:id="@+id/llayout_consigncard_right"></LinearLayout>
+                android:id="@+id/llayout_consign_right"></LinearLayout>
         </RelativeLayout>
     </LinearLayout>
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="51dp"
-        android:background="#FFFFFF"
-        android:layout_marginTop="10dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="订单类型"
-            android:textColor="#303030"
-            android:textSize="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_centerVertical="true"/>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:layout_centerVertical="true"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="请选择"
-                android:textSize="15dp"
-                android:textColor="#A2A2A2"/>
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="9dp"
-                android:layout_gravity="center"
-                android:src="@mipmap/"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#EAEAEA"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"></LinearLayout>
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_consign"></FrameLayout>
 </LinearLayout>

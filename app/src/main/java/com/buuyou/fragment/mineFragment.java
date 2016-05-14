@@ -155,7 +155,7 @@ public class mineFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.llayout_fragmentmine_basicinfo:
-                    Intent intent = new Intent(getActivity().getApplication(), BasicInfo.class);
+                Intent intent = new Intent(getActivity().getApplication(), BasicInfo.class);
                 startActivity(intent);
                 break;
             case R.id.llayout_fragmentmine_accountinfo:

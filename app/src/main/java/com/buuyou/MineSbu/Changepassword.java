@@ -67,7 +67,7 @@ public class Changepassword extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.changepassword);
+        setContentView(R.layout.activity_changepassword);
         sp=getSharedPreferences("data", Context.MODE_PRIVATE);
         back= (ImageView) findViewById(R.id.iv_changepassword_back);
         sure= (Button) findViewById(R.id.bt_changepassword_sure);

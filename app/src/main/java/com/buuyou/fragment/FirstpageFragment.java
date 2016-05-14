@@ -15,7 +15,11 @@ import android.widget.TextView;
 
 import com.buuyou.buuyoucard.R;
 import com.buuyou.firstpageson.Businessinfo;
+import com.buuyou.firstpageson.ChannelAnalyse;
+import com.buuyou.firstpageson.consignmentCard.Consign;
 import com.buuyou.firstpageson.Shortcut;
+import com.buuyou.firstpageson.ordermanagerment.OrderSuccess;
+import com.buuyou.other.MyActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,7 +34,7 @@ public class FirstpageFragment extends Fragment implements View.OnClickListener 
    private TextView tv_fragmentfirstpage_id0,tv_fragmentfirstpage_lastlogin0;
    private EditText et_fragmentfirstpage_pwd0;
    private SharedPreferences sp;
-    private LinearLayout businessinfo,shortcut;
+    private LinearLayout businessinfo,shortcut,ordermanagement,consignmentcard,channelanalyse;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -83,6 +87,9 @@ public class FirstpageFragment extends Fragment implements View.OnClickListener 
         tv_fragmentfirstpage_lastlogin0=(TextView)view.findViewById(R.id.tv_fragmentfirstpage_lastlogin0);
         businessinfo= (LinearLayout) view.findViewById(R.id.llayout_firstpage_businessinfo);
         shortcut= (LinearLayout) view.findViewById(R.id.llayout_firstpage_shortcut);
+        ordermanagement= (LinearLayout) view.findViewById(R.id.llayout_firstpage_ordermanagerment);
+        consignmentcard= (LinearLayout) view.findViewById(R.id.llayout_firstpage_consigncard);
+        channelanalyse= (LinearLayout) view.findViewById(R.id.llayout_firstpage_channelanalyse);
         sp=getActivity().getSharedPreferences("data",Context.MODE_PRIVATE);
         tv_fragmentfirstpage_id0.setText(sp.getString("email", null));
        et_fragmentfirstpage_pwd0.setText(sp.getString("password",null));
@@ -90,6 +97,9 @@ public class FirstpageFragment extends Fragment implements View.OnClickListener 
         tv_fragmentfirstpage_lastlogin0.setText(sp.getString("lastTimes", null));
         businessinfo.setOnClickListener(this);
         shortcut.setOnClickListener(this);
+        ordermanagement.setOnClickListener(this);
+        consignmentcard.setOnClickListener(this);
+        channelanalyse.setOnClickListener(this);
         return view;
     }
 
@@ -127,6 +137,15 @@ public class FirstpageFragment extends Fragment implements View.OnClickListener 
             case R.id.llayout_firstpage_shortcut:
                 Intent intent2=new Intent(getActivity().getApplication(), Shortcut.class);
                 startActivity(intent2);
+                break;
+            case R.id.llayout_firstpage_ordermanagerment:
+                MyActivity.getIntent(getActivity(), OrderSuccess.class);
+                break;
+            case R.id.llayout_firstpage_consigncard:
+                MyActivity.getIntent(getActivity(),Consign.class);
+                break;
+            case R.id.llayout_firstpage_channelanalyse:
+                MyActivity.getIntent(getActivity(),ChannelAnalyse.class);
                 break;
         }
     }

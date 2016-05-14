@@ -136,7 +136,7 @@ back.setOnClickListener(new View.OnClickListener() {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            View view=View.inflate(ChannelRate.this,R.layout.channel_listview,null);
+            View view=View.inflate(ChannelRate.this,R.layout.listview_channel,null);
             lefttext= (TextView) view.findViewById(R.id.left);
             centertext= (TextView) view.findViewById(R.id.center);
             righttext= (TextView) view.findViewById(R.id.right);

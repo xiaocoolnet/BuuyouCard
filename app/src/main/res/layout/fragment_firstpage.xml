@@ -305,7 +305,8 @@
                 android:layout_width="0dp"
                 android:layout_height="95dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/llayout_firstpage_ordermanagerment">
                 <ImageView
                     android:layout_width="42dp"
                     android:layout_height="42dp"
@@ -365,7 +366,8 @@
             android:layout_width="0dp"
             android:layout_height="95dp"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/llayout_firstpage_channelanalyse">
             <ImageView
                 android:layout_width="42dp"
                 android:layout_height="42dp"
@@ -395,7 +397,8 @@
                 android:layout_width="0dp"
                 android:layout_height="95dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/llayout_firstpage_consigncard">
                 <ImageView
                     android:layout_width="42dp"
                     android:layout_height="42dp"

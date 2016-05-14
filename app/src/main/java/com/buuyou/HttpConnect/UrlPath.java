@@ -11,5 +11,8 @@ public class UrlPath {
     public final  static String channelrateType="channelrate";//通道费率
     public final static String loginlogType="userlogs";//登录日志
     public final static String noticeType="buuyou";//登录日志
+    public final static String consigncardType="cardsales";//点卡寄售
+    public final static String ordermanageType="orderlist";//订单管理
+    public final static String channelanalyseType="analyzeinchannel";//通道收入分析
     public  final static String data="&data=";
 }

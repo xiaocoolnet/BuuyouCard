@@ -24,7 +24,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class LoginLog extends AppCompatActivity {
     ListView listview;
@@ -129,7 +128,7 @@ public class LoginLog extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view=View.inflate(LoginLog.this,R.layout.log_listview,null);
+            View view=View.inflate(LoginLog.this,R.layout.listview_log,null);
             address= (TextView) view.findViewById(R.id.address);
             time= (TextView) view.findViewById(R.id.time);
             ip= (TextView) view.findViewById(R.id.ip);

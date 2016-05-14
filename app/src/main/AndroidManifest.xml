@@ -37,7 +37,10 @@
         <activity android:name="com.buuyou.main.Watchdetail" />
         <activity android:name="com.buuyou.firstpageson.Businessinfo" />
         <activity android:name="com.buuyou.firstpageson.Shortcut" />
-        <activity android:name="com.buuyou.firstpageson.ConsignmentCard"></activity>
+        <activity android:name="com.buuyou.firstpageson.ordermanagerment.OrderSuccess" />
+        <activity android:name="com.buuyou.firstpageson.consignmentCard.Search" />
+        <activity android:name="com.buuyou.firstpageson.consignmentCard.Consign"></activity>
+        <activity android:name="com.buuyou.firstpageson.ChannelAnalyse"></activity>
     </application>
 
 </manifest>

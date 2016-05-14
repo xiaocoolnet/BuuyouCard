@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="68dp">
+
+
+    <TextView
+        android:id="@+id/tv_ordersearch_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="11dp"
+        android:text="骏网一卡通"
+        android:textColor="#303030" />
+
+    <TextView
+        android:id="@+id/tv_ordersearch_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_toRightOf="@+id/tv_ordersearch_title"
+        android:text="(支付成功)"
+        android:textColor="#009944" />
+
+
+    <TextView
+        android:id="@+id/tv_ordersearch_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="7dp"
+        android:text="1234567890000"
+        android:textColor="#646464"
+        android:textSize="11dp"/>
+
+    <TextView
+        android:id="@+id/tv_ordersearch_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:text="2016-04-08 16:43"
+        android:textSize="11dp" />
+
+    <TextView
+        android:id="@+id/tv_ordersearch_submitmoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="14dp"
+        android:layout_below="@+id/tv_ordersearch_time"
+        android:layout_marginTop="9dp"
+        android:text="1000"
+        android:textSize="13dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提交金额："
+        android:layout_toLeftOf="@+id/tv_ordersearch_submitmoney"
+        android:layout_below="@+id/tv_ordersearch_time"
+        android:layout_marginTop="9dp"
+        android:textSize="13dp" />
+
+    <TextView
+        android:id="@+id/tv_ordersearch_successmoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="14dp"
+        android:layout_below="@+id/tv_ordersearch_submitmoney"
+        android:text="1000"
+        android:textSize="13dp" />
+    <TextView
+        android:id="@+id/sunum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_ordersearch_submitmoney"
+        android:layout_alignTop="@id/num"
+        android:text="成功金额："
+        android:textSize="13dp"
+        android:layout_toLeftOf="@+id/tv_ordersearch_successmoney"/>
+</RelativeLayout>

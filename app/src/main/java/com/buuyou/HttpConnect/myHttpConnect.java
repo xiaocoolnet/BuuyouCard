@@ -82,6 +82,27 @@ public class myHttpConnect {
         Log.e("log:",urlresult);
         return urlresult;
     }
+    //点卡寄售
+    public static String urlconnect_consigncard(String email,String password,String facemoney,String cardnumber,String cardpass){
+        String url=UrlPath.NET_API+UrlPath.consigncardType+UrlPath.data+email+","+password+","+facemoney+","+cardnumber+","+cardpass;
+        String urlresult=HttpResult(url);
+        Log.e("log:",urlresult);
+        return urlresult;
+    }
+    //订单管理
+    public static String urlconnect_ordermanage(String email,String password,String begintime,String endtime,String ordernum,String paytype,String channelID,String cardnumber,int ordertype,int subtype){
+        String url=UrlPath.NET_API+UrlPath.ordermanageType+UrlPath.data+email+","+password+","+begintime+","+endtime+","+ordernum+","+paytype+","+channelID+","+cardnumber+","+ordertype+","+subtype+","+10+","+1;
+        String urlresult=HttpResult(url);
+        Log.e("log:",urlresult);
+        return urlresult;
+    }
+    //通道收入分析
+    public static String urlconnect_channelanalyse(String email,String password,String begintime,String endtime){
+        String url=UrlPath.NET_API+UrlPath.channelanalyseType+UrlPath.data+email+","+password+","+begintime+","+endtime;
+        String urlresult=HttpResult(url);
+        Log.e("log:",urlresult);
+        return urlresult;
+    }
 
 //连接服务器
     public static String HttpResult(String url) {

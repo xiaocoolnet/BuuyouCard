@@ -91,7 +91,7 @@ public class Findpassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.findpassword);
+        setContentView(R.layout.activity_findpassword);
         sp=getSharedPreferences("data", Context.MODE_PRIVATE);
         email=(EditText)findViewById(R.id.email);
         phone=(EditText)findViewById(R.id.phone);
