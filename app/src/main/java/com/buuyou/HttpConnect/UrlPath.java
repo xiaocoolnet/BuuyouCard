@@ -14,5 +14,9 @@ public class UrlPath {
     public final static String consigncardType="cardsales";//点卡寄售
     public final static String ordermanageType="orderlist";//订单管理
     public final static String channelanalyseType="analyzeinchannel";//通道收入分析
+    public final static String transinfoType="transactioninfo";//交易信息
+    public final static String moneyinfoType="moneyinfo";//财务信息
+    public final static String safecenterType="safeinfo";//安全信息
+    public final static String banklistType="banklist";//银行信息
     public  final static String data="&data=";
 }

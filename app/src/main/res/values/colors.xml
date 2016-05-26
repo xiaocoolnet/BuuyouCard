@@ -10,6 +10,7 @@
     <color name="defaultcolor">#757575</color>
     <color name="failordercolor">#A40000</color>
     <color name="textcolor64">#646464</color>
+    <color name="safecenter_wei">#FF0000</color>
 
 
 </resources>

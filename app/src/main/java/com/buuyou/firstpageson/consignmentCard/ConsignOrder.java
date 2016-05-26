@@ -14,9 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -87,7 +85,7 @@ public class ConsignOrder extends Fragment implements View.OnClickListener {
                         String status=json.getString("status");
                         String message=json.getString("msg");
                         if(status.equals("1")){
-                            MyActivity.getIntent(getActivity(), Search.class);
+                            MyActivity.getIntent(getActivity(), ConsignSearch.class);
                         }else{
                             if(message.equals("No Record")) {
                                 Toast.makeText(getActivity().getApplication(),"未查到相关数据",Toast.LENGTH_SHORT).show();

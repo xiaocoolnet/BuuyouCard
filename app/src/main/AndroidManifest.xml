@@ -9,7 +9,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="布优点卡"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -37,10 +37,16 @@
         <activity android:name="com.buuyou.main.Watchdetail" />
         <activity android:name="com.buuyou.firstpageson.Businessinfo" />
         <activity android:name="com.buuyou.firstpageson.Shortcut" />
-        <activity android:name="com.buuyou.firstpageson.ordermanagerment.OrderSuccess" />
-        <activity android:name="com.buuyou.firstpageson.consignmentCard.Search" />
-        <activity android:name="com.buuyou.firstpageson.consignmentCard.Consign"></activity>
-        <activity android:name="com.buuyou.firstpageson.ChannelAnalyse"></activity>
+        <activity android:name="com.buuyou.firstpageson.ordermanagerment.Order" />
+        <activity android:name="com.buuyou.firstpageson.consignmentCard.ConsignSearch" />
+        <activity android:name="com.buuyou.firstpageson.consignmentCard.Consign" />
+        <activity android:name="com.buuyou.firstpageson.ChannelAnalyse" />
+        <activity android:name="com.buuyou.firstpageson.Transactioninfo" />
+        <activity android:name="com.buuyou.firstpageson.MoneyInfo" />
+        <activity android:name="com.buuyou.firstpageson.ordermanagerment.OrderSearch_success" />
+        <activity android:name="com.buuyou.firstpageson.ordermanagerment.OrderSearch_fail" />
+        <activity android:name="com.buuyou.firstpageson.ordermanagerment.OrderSearching" />
+        <activity android:name="com.buuyou.firstpageson.financemanage.Finance"></activity>
     </application>
 
 </manifest>

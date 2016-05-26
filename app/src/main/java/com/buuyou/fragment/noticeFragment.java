@@ -21,6 +21,7 @@ import com.buuyou.HttpConnect.myHttpConnect;
 import com.buuyou.buuyoucard.R;
 import com.buuyou.imageload.MyApplication;
 import com.buuyou.main.Watchdetail;
+import com.buuyou.other.MyActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -152,8 +153,7 @@ Handler handler=new Handler(){
         next.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(getActivity().getApplication(), Watchdetail.class);
-            startActivity(intent);
+            MyActivity.getIntent(getActivity(),Watchdetail.class);
         }
     });
 

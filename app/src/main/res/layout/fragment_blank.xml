@@ -10,11 +10,7 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="43dp"
         android:id="@+id/fragment_content"></FrameLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#EAEAEB">
-    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="41dp"

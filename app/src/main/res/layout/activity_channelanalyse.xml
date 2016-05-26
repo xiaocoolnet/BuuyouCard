@@ -127,7 +127,8 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:text="提交"
-        android:textColor="#fff" />
+        android:textColor="#fff"
+        android:id="@+id/bt_channelanalyse_submit"/>
 
     <ListView
         android:id="@+id/income_lv"
@@ -135,6 +136,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         android:background="#fff"
+        android:visibility="invisible"
         >
 
     </ListView>

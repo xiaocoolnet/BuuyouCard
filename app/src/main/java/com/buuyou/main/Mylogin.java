@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.buuyou.HttpConnect.myHttpConnect;
 import com.buuyou.buuyoucard.R;
 import com.buuyou.fragment.BlankFragment;
+import com.buuyou.other.MyActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,6 +60,10 @@ public class Mylogin extends AppCompatActivity {
                                 String lastTimes = temp.getString("LastTimes");
                                 String safeCode=temp.getString("SafeCode");
                                 String email=temp.getString("Email");
+                                String bankaccount=temp.getString("BankACCount");
+                                String bankcard=temp.getString("BankCard");
+                                String bankID=temp.getString("BankID");
+                                String bankAddress=temp.getString("BankMore");
                                 //将值通过sp放到data文件中
                                 editor.putString("userid", userid);
                                 editor.putString("password", password);
@@ -68,8 +73,14 @@ public class Mylogin extends AppCompatActivity {
                                 editor.putString("phone",userphone);
                                 editor.putString("QQ",userQQ);
                                 editor.putString("safecode",safeCode);
+                                editor.putString("bankaccount",bankaccount);
+                                editor.putString("bankcard",bankcard);
+                                editor.putString("bankID",bankID);
+                                editor.putString("bankaddress",bankAddress);
                                 //记录用户输入的明文密码
                                 editor.putString("clearpwd",pass.getText().toString());
+                                editor.putString("webname",temp.getString("WebName"));
+                                editor.putString("weburl",temp.getString("WebUrl"));
                                 editor.commit();
                             }
                             finish();
@@ -160,8 +171,7 @@ public class Mylogin extends AppCompatActivity {
         findpassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Mylogin.this, Findpassword.class);
-                startActivity(intent);
+                MyActivity.getIntent(Mylogin.this, Findpassword.class);
             }
         });
     }

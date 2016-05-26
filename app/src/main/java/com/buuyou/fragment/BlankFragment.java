@@ -2,14 +2,19 @@ package com.buuyou.fragment;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.buuyou.HttpConnect.myHttpConnect;
 import com.buuyou.buuyoucard.R;
+import com.buuyou.firstpageson.ordermanagerment.Order;
 
 
 public class BlankFragment extends FragmentActivity {
@@ -17,6 +22,7 @@ public class BlankFragment extends FragmentActivity {
     private RelativeLayout rlayout_firstpage;
     private RelativeLayout rlayout_notice;
     private RelativeLayout rlayout_mine;
+    private RelativeLayout rlayout_order;
     private ImageView img1;
     private ImageView img2;
     private ImageView img3;
@@ -27,8 +33,6 @@ public class BlankFragment extends FragmentActivity {
     private TextView tv3;
     private TextView tv4;
     private TextView tv5;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,7 @@ public class BlankFragment extends FragmentActivity {
         rlayout_firstpage= (RelativeLayout)findViewById(R.id.rlayout_fragment_firstpage);
         rlayout_notice= (RelativeLayout)findViewById(R.id.rlayout_fragment_notice);
         rlayout_mine= (RelativeLayout)findViewById(R.id.rlayout_fragment_mine);
+        rlayout_order= (RelativeLayout)findViewById(R.id.rlayout_fragment_bill);
         img1= (ImageView) findViewById(R.id.iv_fragmentblank_1);
         img2= (ImageView) findViewById(R.id.iv_fragmentblank_2);
         img3= (ImageView) findViewById(R.id.iv_fragmentblank_3);
@@ -61,6 +66,19 @@ public class BlankFragment extends FragmentActivity {
                 FragmentTransaction t = fm.beginTransaction();
                 FirstpageFragment fm_first = new FirstpageFragment();
                 t.replace(R.id.fragment_content, fm_first);
+                t.commit();
+            }
+        });
+        rlayout_order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                init();
+                img2.setImageResource(R.mipmap.bill_selected);
+                tv2.setTextColor(getResources().getColor(R.color.colororange));
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction t = fm.beginTransaction();
+                OrderFragment fm_order = new OrderFragment();
+                t.replace(R.id.fragment_content, fm_order);
                 t.commit();
             }
         });

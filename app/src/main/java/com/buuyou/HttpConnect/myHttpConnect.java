@@ -103,6 +103,34 @@ public class myHttpConnect {
         Log.e("log:",urlresult);
         return urlresult;
     }
+    //交易信息
+    public static String urlconnect_transinfo(String email,String password){
+        String url=UrlPath.NET_API+UrlPath.transinfoType+UrlPath.data+email+","+password;
+        String urlresult=HttpResult(url);
+        Log.e("log:",urlresult);
+        return urlresult;
+    }
+    //财务信息
+    public static String urlconnect_moneyinfo(String email,String password){
+        String url=UrlPath.NET_API+UrlPath.moneyinfoType+UrlPath.data+email+","+password;
+        String urlresult=HttpResult(url);
+        Log.e("log:",urlresult);
+        return urlresult;
+    }
+    //安全信息
+    public static String urlconnect_safeinfo(String email,String password){
+        String url=UrlPath.NET_API+UrlPath.safecenterType+UrlPath.data+email+","+password;
+        String urlresult=HttpResult(url);
+        Log.e("log:",urlresult);
+        return urlresult;
+    }
+    //银行信息
+    public static String urlconnect_banklist(String email,String password){
+        String url=UrlPath.NET_API+UrlPath.banklistType+UrlPath.data+email+","+password;
+        String urlresult=HttpResult(url);
+        Log.e("log:",urlresult);
+        return urlresult;
+    }
 
 //连接服务器
     public static String HttpResult(String url) {

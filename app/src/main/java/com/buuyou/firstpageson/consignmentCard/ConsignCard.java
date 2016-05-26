@@ -134,13 +134,12 @@ public class ConsignCard extends Fragment implements View.OnClickListener {
                                 JSONObject data= (JSONObject) temp.get(i);
                                 listNo.add(data.getString("BillNO"));
                                 listName.add(data.getString("ChannelName"));
-                                listOrdermoney.add(data.getString("OrderMoney"));
-                                listRealmoney.add(data.getString("Realmoney"));
+                                listOrdermoney.add(data.getString("OrderMoney")+"元");
+                                listRealmoney.add(data.getString("Realmoney")+"元");
                                 //以“|”分隔，需要这样写“\\|”
                                 String []a=data.getString("GateMsg").split("\\|");
                                 listStatus.add(a[1]);
-                                String []b=data.getString("PayDate").split("T");
-                                listDate.add(b[0]+" "+b[1]);
+                                listDate.add(MyActivity.getTime(data.getString("PayDate")));
                             }
                         }
 
@@ -173,13 +172,12 @@ public class ConsignCard extends Fragment implements View.OnClickListener {
                                 listNo.add(data.getString("BillNO"));
                                 listName.add(data.getString("ChannelName"));
 
-                                listOrdermoney.add(data.getString("OrderMoney"));
-                                listRealmoney.add(data.getString("Realmoney"));
+                                listOrdermoney.add(data.getString("OrderMoney")+"元");
+                                listRealmoney.add(data.getString("Realmoney")+"元");
                                 //以“|”分隔，需要这样写“\\|”
                                 String []a=data.getString("GateMsg").split("\\|");
                                 listStatus.add(a[1]);
-                                String []b=data.getString("PayDate").split("T");
-                                listDate.add(b[0]+" "+b[1]);
+                                listDate.add(MyActivity.getTime(data.getString("PayDate")));
                             }
                         }
 

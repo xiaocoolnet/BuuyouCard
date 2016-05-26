@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.buuyou.HttpConnect.myHttpConnect;
 import com.buuyou.buuyoucard.R;
+import com.buuyou.other.MyActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,8 +57,7 @@ public class Findpassword extends AppCompatActivity {
                             editor.putBoolean("isboolean", true);
                             editor.commit();
                             Toast.makeText(Findpassword.this,"密码修改成功",Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent(Findpassword.this, Mylogin.class);
-                            startActivity(intent);
+                            MyActivity.getIntent(Findpassword.this, Mylogin.class);
                         }else if(status.equals("0")){
                             Toast.makeText(Findpassword.this,"修改密码失败",Toast.LENGTH_SHORT).show();
                         }

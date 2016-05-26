@@ -8,58 +8,77 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.buuyou.buuyoucard.R;
+import com.buuyou.other.MyActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class SafeCenter extends AppCompatActivity implements View.OnClickListener {
-   private EditText safecode,email;
+   private TextView safecode,email,phone,identity,address;
+    private ImageView back;
+    private SharedPreferences sp;
+    private String result;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_security_cen);
-        SharedPreferences sp=getSharedPreferences("data", MODE_PRIVATE);
-        RelativeLayout safenum=(RelativeLayout)findViewById(R.id.safenum);
-        safenum.setOnClickListener(this);
-        RelativeLayout safeemail=(RelativeLayout)findViewById(R.id.safeemail);
-        safeemail.setOnClickListener(this);
-        RelativeLayout safephone=(RelativeLayout)findViewById(R.id.safephone);
-        safephone.setOnClickListener(this);
-        RelativeLayout myidentity=(RelativeLayout)findViewById(R.id.myidentity);
-        myidentity.setOnClickListener(this);
-        ImageView back= (ImageView) findViewById(R.id.iv_security_back);
+        sp=getSharedPreferences("data",MODE_PRIVATE);
+        safecode= (TextView) findViewById(R.id.tv_security_safecode);
+        email= (TextView) findViewById(R.id.tv_security_email);
+        phone= (TextView) findViewById(R.id.tv_security_phone);
+        identity= (TextView) findViewById(R.id.tv_security_identity);
+        address= (TextView) findViewById(R.id.tv_security_address);
+        back= (ImageView) findViewById(R.id.iv_security_back);
         back.setOnClickListener(this);
-        //显示安全码，EditText不可编辑，设置文本颜色
-        safecode= (EditText) findViewById(R.id.ed_security_safecode);
-        safecode.setText(sp.getString("safecode", null));
-        safecode.setKeyListener(null);
-        safecode.setTextColor(getResources().getColor(R.color.defaultcolor));
-        //显示设置的密保邮箱，EditText不可编辑，设置文本颜色
-        email= (EditText) findViewById(R.id.ed_security_email);
-        email.setKeyListener(null);
-        email.setTextColor(getResources().getColor(R.color.defaultcolor));
-
-
+        try {
+            JSONObject json=new JSONObject(sp.getString("result",null));
+            if(json.getString("status").equals("1")){
+                JSONArray temp=json.getJSONArray("data");
+                for(int i=0;i<temp.length();i++){
+                    JSONObject data= (JSONObject) temp.get(i);
+                    //数据中有“未”字，设置成红色
+                    if(data.getString("safecode").contains("未"))
+                        safecode.setTextColor(getResources().getColor(R.color.safecenter_wei));
+                    if(data.getString("email").contains("未"))
+                        email.setTextColor(getResources().getColor(R.color.safecenter_wei));
+                    if(data.getString("mobile").contains("未"))
+                        phone.setTextColor(getResources().getColor(R.color.safecenter_wei));
+                    if(data.getString("IdentityAuth").contains("未"))
+                        identity.setTextColor(getResources().getColor(R.color.safecenter_wei));
+                    if(data.getString("CallBackUrl").contains("未"))
+                        address.setTextColor(getResources().getColor(R.color.safecenter_wei));
+                    safecode.setText(data.getString("safecode"));
+                    email.setText(data.getString("email"));
+                    phone.setText(data.getString("mobile"));
+                    identity.setText(data.getString("IdentityAuth"));
+                    address.setText(data.getString("CallBackUrl"));
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.safenum :
-                Intent intent=new Intent(SafeCenter.this,ChangeSafeCode.class);
-                startActivity(intent);
-            break;
-            case R.id.safeemail :
-                Intent intent2=new Intent(SafeCenter.this,ExchangeEmail.class);
-                startActivity(intent2);
-                break;
-            case R.id.safephone :
-                Intent intent3=new Intent(SafeCenter.this,ExchangePhone.class);
-                startActivity(intent3);
-                break;
-            case R.id.myidentity :
-                Intent intent4=new Intent(SafeCenter.this,Authentication.class);
-                startActivity(intent4);
-                break;
+//            case R.id.safenum :
+//                MyActivity.getIntent(SafeCenter.this, ChangeSafeCode.class);
+//            break;
+//            case R.id.safeemail :
+//                MyActivity.getIntent(SafeCenter.this, ExchangeEmail.class);
+//                break;
+//            case R.id.safephone :
+//                MyActivity.getIntent(SafeCenter.this, ExchangePhone.class);
+//                break;
+//            case R.id.myidentity :
+//                MyActivity.getIntent(SafeCenter.this,Authentication.class);
+//                break;
             case R.id.iv_security_back:
                 finish();
                 break;

@@ -176,7 +176,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="(66666666}"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:layout_marginLeft="49dp"
             android:id="@+id/tv_basicinfo_qq"
             />
@@ -202,7 +202,7 @@
             android:text="布优点卡"
             android:textSize="15sp"
             android:layout_marginLeft="49dp"
-
+            android:id="@+id/tv_basicinfo_webname"
             />
     </LinearLayout>
     <LinearLayout
@@ -224,8 +224,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="www.buyouxiaola.com"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:layout_marginLeft="49dp"
+            android:id="@+id/tv_basicinfo_weburl"
 
             />
     </LinearLayout>

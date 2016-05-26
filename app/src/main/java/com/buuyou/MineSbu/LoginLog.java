@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.buuyou.HttpConnect.myHttpConnect;
 import com.buuyou.buuyoucard.R;
+import com.buuyou.other.MyActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,7 +60,7 @@ public class LoginLog extends AppCompatActivity {
                             for(int i=0;i<data.length();i++){
                                 JSONObject temp= (JSONObject) data.get(i);
                                 String area=temp.getString("LoginArea");
-                                String date=temp.getString("LoginDate");
+                                String date= MyActivity.getTime(temp.getString("LoginDate"));
                                 String ip=temp.getString("LoginIP");
                                 listarea.add(area);
                                 listdate.add(date);

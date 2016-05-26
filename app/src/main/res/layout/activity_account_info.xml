@@ -66,6 +66,7 @@
             android:text="请选择"
             android:textSize="15sp"
             android:layout_marginLeft="20dp"
+            android:id="@+id/tv_accountinfo_bankname"
             />
         <ImageView
             android:layout_width="9dp"
@@ -97,6 +98,7 @@
             android:text="布优点卡"
             android:textSize="15sp"
             android:layout_marginLeft="20dp"
+            android:id="@+id/tv_accountinfo_bankaccount"
             />
     </LinearLayout>
     <LinearLayout
@@ -120,7 +122,7 @@
             android:text="123456789987456"
             android:textSize="15sp"
             android:layout_marginLeft="20dp"
-
+            android:id="@+id/tv_accountinfo_bankcard"
             />
     </LinearLayout>
     <LinearLayout
@@ -138,12 +140,17 @@
             android:textSize="15sp"
             android:layout_marginLeft="15dp"
             />
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""
+            android:background="@null"
+            android:text="111"
             android:textSize="15sp"
+            android:layout_marginRight="15dp"
             android:layout_marginLeft="20dp"
+            android:singleLine="true"
+            android:focusable="false"
+            android:id="@+id/et_accountinfo_bankaddress"
             />
     </LinearLayout>
 </LinearLayout>

@@ -14,6 +14,7 @@ import com.buuyou.MineSbu.LoginLog;
 import com.buuyou.MineSbu.SafeCenter;
 import com.buuyou.MineSbu.Changepassword;
 import com.buuyou.buuyoucard.R;
+import com.buuyou.other.MyActivity;
 
 public class Businessinfo extends AppCompatActivity implements View.OnClickListener {
     private ImageView back;
@@ -48,28 +49,22 @@ public class Businessinfo extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.rlayout_businessinfo_basicinfo:
-                Intent intent1=new Intent(Businessinfo.this, BasicInfo.class);
-                startActivity(intent1);
+                MyActivity.getIntent(Businessinfo.this, BasicInfo.class);
                 break;
             case R.id.rlayout_businessinfo_accountinfo:
-                Intent intent2=new Intent(Businessinfo.this, AccountInfo.class);
-                startActivity(intent2);
+                MyActivity.getIntent(Businessinfo.this, AccountInfo.class);
                 break;
             case R.id.rlayout_businessinfo_safecenter:
-                Intent intent3=new Intent(Businessinfo.this, SafeCenter.class);
-                startActivity(intent3);
+                MyActivity.getIntent(Businessinfo.this, SafeCenter.class);
                 break;
             case R.id.rlayout_businessinfo_changepwd:
-                Intent intent4=new Intent(Businessinfo.this, Changepassword.class);
-                startActivity(intent4);
+                MyActivity.getIntent(Businessinfo.this, Changepassword.class);
                 break;
             case R.id.rlayout_businessinfo_loginlog:
-                Intent intent5=new Intent(Businessinfo.this, LoginLog.class);
-                startActivity(intent5);
+                MyActivity.getIntent(Businessinfo.this, LoginLog.class);
                 break;
             case R.id.rlayout_businessinfo_channelrate:
-                Intent intent6=new Intent(Businessinfo.this, ChannelRate.class);
-                startActivity(intent6);
+                MyActivity.getIntent(Businessinfo.this, ChannelRate.class);
                 break;
         }
     }

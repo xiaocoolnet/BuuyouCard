@@ -59,19 +59,16 @@
             android:textSize="15sp"
             android:layout_marginLeft="15dp"
             />
-        <EditText
+        <TextView
             android:layout_toLeftOf="@+id/iv_security_safecode"
             android:layout_toRightOf="@id/num"
             android:layout_marginRight="10dp"
-            android:singleLine="true"
-            android:background="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="未设置"
             android:textSize="15sp"
-            android:textColor="#FF0000"
             android:layout_marginLeft="20dp"
-            android:id="@+id/ed_security_safecode"
+            android:id="@+id/tv_security_safecode"
 
             />
         <ImageView
@@ -101,19 +98,16 @@
             android:textSize="15sp"
             android:layout_marginLeft="15dp"
             />
-        <EditText
+        <TextView
             android:layout_toLeftOf="@+id/iv_security_email"
             android:layout_toRightOf="@id/email"
             android:layout_marginRight="10dp"
-            android:singleLine="true"
-            android:background="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="未绑定"
             android:textSize="15sp"
-            android:textColor="#FF0000"
             android:layout_marginLeft="20dp"
-            android:id="@+id/ed_security_email"
+            android:id="@+id/tv_security_email"
             />
         <ImageView
             android:layout_width="9dp"
@@ -141,13 +135,11 @@
             android:textSize="15sp"
             android:layout_marginLeft="15dp"
             />
-        <EditText
+        <TextView
             android:layout_toRightOf="@id/phone"
             android:layout_toLeftOf="@+id/iv_security_phone"
-
+            android:id="@+id/tv_security_phone"
             android:layout_marginRight="10dp"
-            android:singleLine="true"
-            android:background="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="6666666666"
@@ -181,18 +173,15 @@
             android:textSize="15sp"
             android:layout_marginLeft="15dp"
             />
-        <EditText
+        <TextView
             android:layout_toRightOf="@id/identity"
             android:layout_toLeftOf="@+id/iv_security_identity"
-
+            android:id="@+id/tv_security_identity"
             android:layout_marginRight="10dp"
-            android:singleLine="true"
-            android:background="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="未认证"
             android:textSize="15sp"
-            android:textColor="#FF0000"
             android:layout_marginLeft="20dp"
             />
         <ImageView
@@ -222,13 +211,11 @@
             android:textSize="15sp"
             android:layout_marginLeft="15dp"
             />
-        <EditText
+        <TextView
             android:layout_toRightOf="@id/adress"
             android:layout_toLeftOf="@+id/iv_security_address"
-
+            android:id="@+id/tv_security_address"
             android:layout_marginRight="10dp"
-            android:singleLine="true"
-            android:background="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="烟台市莱山区"

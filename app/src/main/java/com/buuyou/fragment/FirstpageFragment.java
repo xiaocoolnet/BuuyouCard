@@ -2,24 +2,34 @@ package com.buuyou.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.buuyou.HttpConnect.myHttpConnect;
 import com.buuyou.buuyoucard.R;
 import com.buuyou.firstpageson.Businessinfo;
 import com.buuyou.firstpageson.ChannelAnalyse;
+import com.buuyou.firstpageson.MoneyInfo;
+import com.buuyou.firstpageson.Transactioninfo;
 import com.buuyou.firstpageson.consignmentCard.Consign;
 import com.buuyou.firstpageson.Shortcut;
-import com.buuyou.firstpageson.ordermanagerment.OrderSuccess;
+import com.buuyou.firstpageson.financemanage.Finance;
+import com.buuyou.firstpageson.ordermanagerment.Order;
 import com.buuyou.other.MyActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,7 +44,34 @@ public class FirstpageFragment extends Fragment implements View.OnClickListener 
    private TextView tv_fragmentfirstpage_id0,tv_fragmentfirstpage_lastlogin0;
    private EditText et_fragmentfirstpage_pwd0;
    private SharedPreferences sp;
-    private LinearLayout businessinfo,shortcut,ordermanagement,consignmentcard,channelanalyse;
+    private LinearLayout businessinfo,shortcut,ordermanagement,consignmentcard,channelanalyse,transinfo,transinfo2,moneyinfo,finance;
+    private String result="";
+    Handler handler=new Handler(){
+        public void handleMessage(Message msg){
+            switch (msg.what){
+                case 1:
+                    Toast.makeText(getActivity(),"网络连接错误",Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+                    try {
+                        JSONObject json=new JSONObject(result);
+                        JSONArray temp=json.getJSONArray("data");
+                        SharedPreferences.Editor editor=sp.edit();
+                        for(int i=0;i<temp.length();i++){
+                            JSONObject data= (JSONObject) temp.get(i);
+                            if(data.getString("BankID").equals(sp.getString("bankID",null))){
+                                editor.putString("bankname",data.getString("BankName"));
+                                editor.commit();
+                            }
+
+                        }
+                        MyActivity.getIntent(getActivity(),Finance.class);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+            }
+        }
+    };
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -89,10 +126,15 @@ public class FirstpageFragment extends Fragment implements View.OnClickListener 
         shortcut= (LinearLayout) view.findViewById(R.id.llayout_firstpage_shortcut);
         ordermanagement= (LinearLayout) view.findViewById(R.id.llayout_firstpage_ordermanagerment);
         consignmentcard= (LinearLayout) view.findViewById(R.id.llayout_firstpage_consigncard);
+        transinfo= (LinearLayout) view.findViewById(R.id.llayout_firstpage_transactioninfo);
+        transinfo2= (LinearLayout) view.findViewById(R.id.llayout_firstpage_transactioninfo2);
         channelanalyse= (LinearLayout) view.findViewById(R.id.llayout_firstpage_channelanalyse);
+        moneyinfo= (LinearLayout) view.findViewById(R.id.llayout_firstpage_moneyinfo);
+        finance= (LinearLayout) view.findViewById(R.id.llayout_firstpage_financemanage);
+
         sp=getActivity().getSharedPreferences("data",Context.MODE_PRIVATE);
         tv_fragmentfirstpage_id0.setText(sp.getString("email", null));
-       et_fragmentfirstpage_pwd0.setText(sp.getString("password",null));
+        et_fragmentfirstpage_pwd0.setText(sp.getString("password",null));
         et_fragmentfirstpage_pwd0.setKeyListener(null);
         tv_fragmentfirstpage_lastlogin0.setText(sp.getString("lastTimes", null));
         businessinfo.setOnClickListener(this);
@@ -100,6 +142,10 @@ public class FirstpageFragment extends Fragment implements View.OnClickListener 
         ordermanagement.setOnClickListener(this);
         consignmentcard.setOnClickListener(this);
         channelanalyse.setOnClickListener(this);
+        transinfo.setOnClickListener(this);
+        transinfo2.setOnClickListener(this);
+        moneyinfo.setOnClickListener(this);
+        finance.setOnClickListener(this);
         return view;
     }
 
@@ -131,21 +177,87 @@ public class FirstpageFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.llayout_firstpage_businessinfo:
-                Intent intent1=new Intent(getActivity().getApplication(), Businessinfo.class);
-                startActivity(intent1);
+                MyActivity.getIntent(getActivity(), Businessinfo.class);
                 break;
             case R.id.llayout_firstpage_shortcut:
-                Intent intent2=new Intent(getActivity().getApplication(), Shortcut.class);
-                startActivity(intent2);
+                MyActivity.getIntent(getActivity(), Shortcut.class);
                 break;
             case R.id.llayout_firstpage_ordermanagerment:
-                MyActivity.getIntent(getActivity(), OrderSuccess.class);
+                MyActivity.getIntent(getActivity(), Order.class);
                 break;
             case R.id.llayout_firstpage_consigncard:
                 MyActivity.getIntent(getActivity(),Consign.class);
                 break;
             case R.id.llayout_firstpage_channelanalyse:
                 MyActivity.getIntent(getActivity(),ChannelAnalyse.class);
+                break;
+            case R.id.llayout_firstpage_financemanage:
+                new Thread(){
+                    public void run(){
+                        if(myHttpConnect.isConnnected(getActivity())){
+                            result=myHttpConnect.urlconnect_banklist(sp.getString("email", null), sp.getString("clearpwd", null));
+                            handler.sendEmptyMessage(2);
+                        }
+                        else{
+                            //网络连接错误
+                            handler.sendEmptyMessage(1);
+                        }
+                    }
+                }.start();
+                break;
+            case R.id.llayout_firstpage_transactioninfo:
+                final SharedPreferences.Editor editor=sp.edit();
+                new Thread(){
+                    public void run(){
+                        if(myHttpConnect.isConnnected(getActivity())){
+                            result=myHttpConnect.urlconnect_transinfo(sp.getString("email",null),sp.getString("clearpwd",null));
+                            MyActivity.getIntent(getActivity(), Transactioninfo.class);
+                        }
+                        else{
+                            //网络连接错误
+                            handler.sendEmptyMessage(1);
+                        }
+                        editor.putString("result",result);
+                        editor.commit();
+                    }
+                }.start();
+
+                break;
+            case R.id.llayout_firstpage_transactioninfo2:
+                final SharedPreferences.Editor editor2=sp.edit();
+                new Thread(){
+                    public void run(){
+                        if(myHttpConnect.isConnnected(getActivity())){
+                            result=myHttpConnect.urlconnect_transinfo(sp.getString("email",null),sp.getString("clearpwd",null));
+                            MyActivity.getIntent(getActivity(), Transactioninfo.class);
+                        }
+                        else{
+                            //网络连接错误
+                            handler.sendEmptyMessage(1);
+                        }
+                        editor2.putString("result",result);
+                        editor2.commit();
+                    }
+                }.start();
+
+                break;
+            case R.id.llayout_firstpage_moneyinfo:
+                final SharedPreferences.Editor editor3=sp.edit();
+                new Thread(){
+                    public void run(){
+                        if(myHttpConnect.isConnnected(getActivity())){
+                            result=myHttpConnect.urlconnect_moneyinfo(sp.getString("email",null),sp.getString("clearpwd",null));
+                            MyActivity.getIntent(getActivity(), MoneyInfo.class);
+                        }
+                        else{
+                            //网络连接错误
+                            handler.sendEmptyMessage(1);
+                        }
+                        editor3.putString("result",result);
+                        editor3.commit();
+                    }
+                }.start();
+
                 break;
         }
     }

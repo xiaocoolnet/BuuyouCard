@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.buuyou.HttpConnect.myHttpConnect;
 import com.buuyou.MineSbu.AboutBuu;
 import com.buuyou.MineSbu.AccountInfo;
 import com.buuyou.MineSbu.BasicInfo;
@@ -24,6 +28,7 @@ import com.buuyou.MineSbu.Updata;
 import com.buuyou.buuyoucard.R;
 import com.buuyou.main.Mylogin;
 import com.buuyou.MineSbu.Changepassword;
+import com.buuyou.other.MyActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,11 +39,27 @@ import com.buuyou.MineSbu.Changepassword;
  * create an instance of this fragment.
  */
 public class mineFragment extends Fragment implements View.OnClickListener {
-    TextView tv_fragmentmine_id;
-    EditText et_fragmentmine_pwd;
-    Button exit;
-    SharedPreferences sp;
-    LinearLayout basicinfo,accountinfo,safecenter,changepwd,loginlog,channelrate,about,versionupdate;
+   private String result;
+    private TextView tv_fragmentmine_id,name;
+    private EditText et_fragmentmine_pwd;
+    private Button exit;
+    private SharedPreferences sp;
+    private LinearLayout basicinfo,accountinfo,safecenter,changepwd,loginlog,channelrate,about,versionupdate;
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 1:
+                    Toast.makeText(getActivity(),"网络连接错误",Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+                    SharedPreferences.Editor editor=sp.edit();
+                    editor.putString("result",result);
+                    editor.commit();
+                    MyActivity.getIntent(getActivity(), SafeCenter.class);
+            }
+        }
+    };
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -98,7 +119,9 @@ public class mineFragment extends Fragment implements View.OnClickListener {
         channelrate= (LinearLayout) view.findViewById(R.id.llayout_fragmentmine_channelRate);
         about= (LinearLayout) view.findViewById(R.id.llayout_fragmentmine_about);
         versionupdate= (LinearLayout) view.findViewById(R.id.llayout_fragmentmine_versionupdate);
+        name= (TextView) view.findViewById(R.id.tv_fragmentmine_name);
         exit=(Button)view.findViewById(R.id.exit);
+        name.setText(sp.getString("name",null));
         tv_fragmentmine_id.setText("ID:"+sp.getString("email",null));
         et_fragmentmine_pwd.setText(sp.getString("password", null));
         et_fragmentmine_pwd.setKeyListener(null);
@@ -155,36 +178,38 @@ public class mineFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.llayout_fragmentmine_basicinfo:
-                Intent intent = new Intent(getActivity().getApplication(), BasicInfo.class);
-                startActivity(intent);
+                MyActivity.getIntent(getActivity(), BasicInfo.class);
                 break;
             case R.id.llayout_fragmentmine_accountinfo:
-                Intent intent2 = new Intent(getActivity().getApplication(), AccountInfo.class);
-                startActivity(intent2);
+                MyActivity.getIntent(getActivity(), AccountInfo.class);
                 break;
             case R.id.llayout_fragmentmine_safecenter:
-                Intent intent3 = new Intent(getActivity().getApplication(), SafeCenter.class);
-                startActivity(intent3);
+                new Thread(){
+                    public void run(){
+                        if(myHttpConnect.isConnnected(getActivity())){
+                            result=myHttpConnect.urlconnect_safeinfo(sp.getString("email",null),sp.getString("clearpwd",null));
+                            handler.sendEmptyMessage(2);
+                        }else{
+                            handler.sendEmptyMessage(1);
+                        }
+                    }
+                }.start();
+
                 break;
             case R.id.llayout_fragmentmine_changepwd:
-                Intent intent4 = new Intent(getActivity().getApplication(),Changepassword.class);
-                startActivity(intent4);
+                MyActivity.getIntent(getActivity(), Changepassword.class);
                 break;
             case R.id.llayout_fragmentmine_loginlog:
-                Intent intent5 = new Intent(getActivity().getApplication(), LoginLog.class);
-                startActivity(intent5);
+                MyActivity.getIntent(getActivity(), LoginLog.class);
                 break;
             case R.id.llayout_fragmentmine_channelRate:
-                Intent intent6 = new Intent(getActivity().getApplication(), ChannelRate.class);
-                startActivity(intent6);
+                MyActivity.getIntent(getActivity(), ChannelRate.class);
                 break;
             case R.id.llayout_fragmentmine_about:
-                Intent intent7 = new Intent(getActivity().getApplication(), AboutBuu.class);
-                startActivity(intent7);
+                MyActivity.getIntent(getActivity(), AboutBuu.class);
                 break;
             case R.id.llayout_fragmentmine_versionupdate:
-                Intent intent8 = new Intent(getActivity().getApplication(), Updata.class);
-                startActivity(intent8);
+                MyActivity.getIntent(getActivity(),Updata.class);
                 break;
             case R.id.exit:
                 final SharedPreferences.Editor editor=sp.edit();

@@ -34,10 +34,11 @@ public class MyActivity {
     //得到结束时间
     public static String getEnddate(TextView textView){
         date = textView.getText().toString().trim();
-        //获取时间
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-        time = timeFormat.format(new java.util.Date());
-        //结合
-        return date+"T"+time;
+        return date+"T23:59:59";
+    }
+    public static String getTime(String time){
+        String []a=time.split("T");
+        String []b=a[1].split("\\.");
+        return a[0]+" "+b[0];
     }
 }
