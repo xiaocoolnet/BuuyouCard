@@ -45,11 +45,12 @@ public class ChannelAnalyse extends AppCompatActivity implements View.OnClickLis
     private Handler handler=new Handler(){
         public void handleMessage(Message msg){
             switch (msg.what){
-                case 1:
-                    Toast.makeText(getApplication(),"请选择日期",Toast.LENGTH_SHORT).show();
-                    break;
                 case 2:
                     try {
+                        namelist.clear();
+                        nolist.clear();
+                        contractmoneylist.clear();
+                        dividemoneylist.clear();
                         Log.e("11111111",result);
                         JSONObject json=new JSONObject(result);
                         String status=json.getString("status");
@@ -66,7 +67,8 @@ public class ChannelAnalyse extends AppCompatActivity implements View.OnClickLis
                                 contractmoneylist.add(data.getString("TruePrice")+"元");
                                 dividemoneylist.add(data.getString("UserPrice")+"元");
                             }
-                            //listView.setAdapter(new MyAdapter());
+                            listView = (ListView) findViewById(R.id.income_lv);
+                            listView.setAdapter(new MyAdapter());
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -118,18 +120,13 @@ public class ChannelAnalyse extends AppCompatActivity implements View.OnClickLis
             case R.id.bt_channelanalyse_submit:
                 new Thread(){
                     public void run(){
-                        if(begindate.getText().toString().equals("选择日期")||enddate.getText().toString().equals("选择日期")){
-                            handler.sendEmptyMessage(1);
+                        if(myHttpConnect.isConnnected(getApplication())){
+                            str_begin= MyActivity.getBegindate(begindate);
+                            str_end=MyActivity.getEnddate(enddate);
+                            result=myHttpConnect.urlconnect_channelanalyse(str_email,str_pwd,str_begin,str_end);
+                            handler.sendEmptyMessage(2);
                         }else{
-                            if(myHttpConnect.isConnnected(getApplication())){
-                                str_begin= MyActivity.getBegindate(begindate);
-                                str_end=MyActivity.getEnddate(enddate);
-                                result=myHttpConnect.urlconnect_channelanalyse(str_email,str_pwd,str_begin,str_end);
-                                handler.sendEmptyMessage(2);
-
-                            }else{
-                                handler.sendEmptyMessage(3);
-                            }
+                            handler.sendEmptyMessage(3);
                         }
                     }
                 }.start();

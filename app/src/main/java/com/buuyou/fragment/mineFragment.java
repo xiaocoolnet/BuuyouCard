@@ -46,21 +46,6 @@ public class mineFragment extends Fragment implements View.OnClickListener {
     private Button exit;
     private SharedPreferences sp;
     private LinearLayout basicinfo,accountinfo,safecenter,changepwd,loginlog,channelrate,about,versionupdate;
-    private Handler handler=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case 1:
-                    Toast.makeText(getActivity(),"网络连接错误",Toast.LENGTH_SHORT).show();
-                    break;
-                case 2:
-                    SharedPreferences.Editor editor=sp.edit();
-                    editor.putString("result",result);
-                    editor.commit();
-                    MyActivity.getIntent(getActivity(), SafeCenter.class);
-            }
-        }
-    };
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -186,17 +171,7 @@ public class mineFragment extends Fragment implements View.OnClickListener {
                 MyActivity.getIntent(getActivity(), AccountInfo.class);
                 break;
             case R.id.llayout_fragmentmine_safecenter:
-                new Thread(){
-                    public void run(){
-                        if(myHttpConnect.isConnnected(getActivity())){
-                            result=myHttpConnect.urlconnect_safeinfo(sp.getString("email",null),sp.getString("clearpwd",null));
-                            handler.sendEmptyMessage(2);
-                        }else{
-                            handler.sendEmptyMessage(1);
-                        }
-                    }
-                }.start();
-
+                MyActivity.getIntent(getActivity(), SafeCenter.class);
                 break;
             case R.id.llayout_fragmentmine_changepwd:
                 MyActivity.getIntent(getActivity(), Changepassword.class);

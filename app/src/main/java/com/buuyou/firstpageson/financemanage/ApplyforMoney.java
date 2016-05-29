@@ -106,6 +106,7 @@ public class ApplyforMoney extends Fragment implements View.OnClickListener {
                                 editor.commit();
                                 Log.e("+++", sp.getString("bankname", null));
                                 bankname.setText(sp.getString("bankname", null));
+
                             }
 
                         }
@@ -114,6 +115,8 @@ public class ApplyforMoney extends Fragment implements View.OnClickListener {
                             editor.putString("availablemoney", data.getString("AvailableBalance"));
                             editor.putString("usermoney",data.getString("UserMoney"));
                             editor.commit();
+                            availablemoney.setText(sp.getString("availablemoney",null));
+                            usermoney.setText(sp.getString("usermoney",null));
                         }
 
                     } catch (JSONException e) {
