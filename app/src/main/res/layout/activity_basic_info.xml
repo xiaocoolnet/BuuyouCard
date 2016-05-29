@@ -12,14 +12,18 @@
         android:layout_height="45dp"
         android:background="#FF9100"
         >
-        <ImageView
-            android:layout_width="10dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/back"
-            android:id="@+id/iv_basicinfo_back"
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="16dp"
-            />
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_basicinfo_back">
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/back"
+                />
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,9 +32,7 @@
             android:textColor="#FFFFFF"
             android:id="@+id/tv_basicinfo_title"
             android:layout_toRightOf="@+id/iv_basicinfo_back"
-            android:layout_marginTop="14dp"
-            android:layout_marginLeft="20dp"
-            />
+            android:layout_centerVertical="true"            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,8 +40,9 @@
             android:textSize="18sp"
             android:layout_alignParentRight="true"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="14dp"
+            android:layout_centerVertical="true"
             android:layout_marginRight="14dp"
+            android:id="@+id/tv_basicinfo_edit"
             />
     </RelativeLayout>
     <LinearLayout
@@ -80,13 +83,16 @@
             android:textSize="15sp"
             android:layout_marginLeft="15dp"
             />
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="(66666}"
             android:textSize="15sp"
             android:layout_marginLeft="49dp"
             android:id="@+id/tv_basicinfo_name"
+            android:background="@null"
+            android:singleLine="true"
+            android:focusable="false"
             />
     </LinearLayout>
     <RelativeLayout
@@ -115,13 +121,13 @@
             android:layout_marginLeft="49dp"
             android:id="@+id/tv_basicinfo_email"
             />
-        <ImageView
-            android:layout_width="9dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/next"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            />
+        <!--<ImageView-->
+            <!--android:layout_width="9dp"-->
+            <!--android:layout_height="15dp"-->
+            <!--android:src="@mipmap/next"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--/>-->
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/phonecg"
@@ -149,13 +155,13 @@
             android:layout_marginLeft="49dp"
             android:id="@+id/tv_basicinfo_phone"
             />
-        <ImageView
-            android:layout_width="9dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/next"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            />
+        <!--<ImageView-->
+            <!--android:layout_width="9dp"-->
+            <!--android:layout_height="15dp"-->
+            <!--android:src="@mipmap/next"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--/>-->
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -172,13 +178,16 @@
             android:textSize="18sp"
             android:layout_marginLeft="15dp"
             />
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="(66666666}"
             android:textSize="15sp"
             android:layout_marginLeft="49dp"
             android:id="@+id/tv_basicinfo_qq"
+            android:background="@null"
+            android:singleLine="true"
+            android:focusable="false"
             />
     </LinearLayout>
     <LinearLayout
@@ -196,13 +205,16 @@
             android:textSize="15sp"
             android:layout_marginLeft="15dp"
             />
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="布优点卡"
             android:textSize="15sp"
             android:layout_marginLeft="49dp"
             android:id="@+id/tv_basicinfo_webname"
+            android:background="@null"
+            android:singleLine="true"
+            android:focusable="false"
             />
     </LinearLayout>
     <LinearLayout
@@ -220,14 +232,16 @@
             android:textSize="15sp"
             android:layout_marginLeft="15dp"
             />
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="www.buyouxiaola.com"
             android:textSize="15sp"
             android:layout_marginLeft="49dp"
             android:id="@+id/tv_basicinfo_weburl"
-
+            android:background="@null"
+            android:singleLine="true"
+            android:focusable="false"
             />
     </LinearLayout>
 </LinearLayout>

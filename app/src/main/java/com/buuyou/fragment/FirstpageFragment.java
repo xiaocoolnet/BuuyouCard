@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,30 +46,13 @@ public class FirstpageFragment extends Fragment implements View.OnClickListener 
    private EditText et_fragmentfirstpage_pwd0;
    private SharedPreferences sp;
     private LinearLayout businessinfo,shortcut,ordermanagement,consignmentcard,channelanalyse,transinfo,transinfo2,moneyinfo,finance;
-    private String result="";
+    private String result="",result_temp="";
     Handler handler=new Handler(){
         public void handleMessage(Message msg){
             switch (msg.what){
                 case 1:
                     Toast.makeText(getActivity(),"网络连接错误",Toast.LENGTH_SHORT).show();
                     break;
-                case 2:
-                    try {
-                        JSONObject json=new JSONObject(result);
-                        JSONArray temp=json.getJSONArray("data");
-                        SharedPreferences.Editor editor=sp.edit();
-                        for(int i=0;i<temp.length();i++){
-                            JSONObject data= (JSONObject) temp.get(i);
-                            if(data.getString("BankID").equals(sp.getString("bankID",null))){
-                                editor.putString("bankname",data.getString("BankName"));
-                                editor.commit();
-                            }
-
-                        }
-                        MyActivity.getIntent(getActivity(),Finance.class);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
             }
         }
     };
@@ -192,18 +176,7 @@ public class FirstpageFragment extends Fragment implements View.OnClickListener 
                 MyActivity.getIntent(getActivity(),ChannelAnalyse.class);
                 break;
             case R.id.llayout_firstpage_financemanage:
-                new Thread(){
-                    public void run(){
-                        if(myHttpConnect.isConnnected(getActivity())){
-                            result=myHttpConnect.urlconnect_banklist(sp.getString("email", null), sp.getString("clearpwd", null));
-                            handler.sendEmptyMessage(2);
-                        }
-                        else{
-                            //网络连接错误
-                            handler.sendEmptyMessage(1);
-                        }
-                    }
-                }.start();
+                MyActivity.getIntent(getActivity(),Finance.class);
                 break;
             case R.id.llayout_firstpage_transactioninfo:
                 final SharedPreferences.Editor editor=sp.edit();

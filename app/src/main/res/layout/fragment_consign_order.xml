@@ -69,7 +69,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="请选择"
+                android:text="所有类型"
                 android:textSize="15dp"
                 android:textColor="#A2A2A2"
                 android:id="@+id/tv_consignorder_choosetype"/>

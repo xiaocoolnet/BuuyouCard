@@ -3,6 +3,7 @@ package com.buuyou.firstpageson.consignmentCard;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,7 +72,7 @@ public class ConsignCard extends Fragment implements View.OnClickListener {
      * @return A new instance of fragment ConsignCard.
      */
     // TODO: Rename and change types and number of parameters
-    private ListView listView;
+    private RefreshListView listView;
     private ImageView back;
     private LinearLayout choose;
     private TextView tv_choosemoney;
@@ -89,13 +91,13 @@ public class ConsignCard extends Fragment implements View.OnClickListener {
     ArrayList<String> listOrdermoney=new ArrayList<String>();
     ArrayList<String> listRealmoney=new ArrayList<String>();
     List<String> str=new ArrayList<String>();
-    Dropdown d=new Dropdown();
     private SharedPreferences sp;
     private Handler handler=new Handler(){
         public void handleMessage(Message msg){
             switch (msg.what){
                 case 1:
                     Toast.makeText(getActivity().getApplication(), "网络连接错误", Toast.LENGTH_SHORT).show();
+                    listView.onRefreshComplete();
                     break;
                 case 2:
                     listRealmoney.clear();
@@ -186,6 +188,7 @@ public class ConsignCard extends Fragment implements View.OnClickListener {
                     }
                     //重新给listview设置适配器，使listview刷新
                     listView.setAdapter(new Myadapter());
+                    listView.onRefreshComplete();
                     break;
 
             }
@@ -222,7 +225,7 @@ public class ConsignCard extends Fragment implements View.OnClickListener {
         for(int i=0;i<m.length;i++){
             str.add(m[i]);
         }
-        listView= (ListView) view.findViewById(R.id.listview);
+        listView=(RefreshListView)view.findViewById(R.id.listview);
         choose= (LinearLayout) view.findViewById(R.id.llayout_consigncard_choose);
         tv_choosemoney= (TextView) view.findViewById(R.id.tv_consigncard_money);
         refrush= (ImageView) view.findViewById(R.id.iv_consigncard_refrush);
@@ -238,6 +241,25 @@ public class ConsignCard extends Fragment implements View.OnClickListener {
         choose.setOnClickListener(this);
 
 
+        listView.setOnRefreshListener(new RefreshListView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Thread(){
+                    public void run(){
+                        if (myHttpConnect.isConnnected(getActivity().getApplication())) {
+                            result_order=myHttpConnect.urlconnect_ordermanage(email, pwd, "2016-01-01", "", "", "", "", cardnum,3,1);
+                            handler.sendEmptyMessage(4);
+
+                        } else {
+                            //网络有问题
+                            handler.sendEmptyMessage(1);
+                        }
+                    }
+                }.start();
+            }
+
+
+        });
         return view;
     }
 
@@ -272,14 +294,14 @@ public class ConsignCard extends Fragment implements View.OnClickListener {
                 Dropdown.dropdown(tv_choosemoney,getActivity().getApplicationContext(),str);
                 break;
             case R.id.bt_consignment_commit:
-                //点击提交按钮，记录当前日期
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                date = dateFormat.format(new java.util.Date());
-                //获取时间
-                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-                time = timeFormat.format(new java.util.Date());
-                date=date+time;
-                Log.e("date:",date);
+//                //点击提交按钮，记录当前日期
+//                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//                date = dateFormat.format(new java.util.Date());
+//                //获取时间
+//                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+//                time = timeFormat.format(new java.util.Date());
+//                date=date+time;
+//                Log.e("date:",date);
                 new Thread(){
                     public void run(){
                         facemoney=tv_choosemoney.getText().toString().trim();
@@ -291,7 +313,7 @@ public class ConsignCard extends Fragment implements View.OnClickListener {
                         }else{
                             if (myHttpConnect.isConnnected(getActivity().getApplication())) {
                                 result_card = myHttpConnect.urlconnect_consigncard(email, pwd, facemoney, cardnum, cardpwd);
-                                result_order=myHttpConnect.urlconnect_ordermanage(email, pwd, "2016-01-01", date, "", "", "", cardnum,3,1);
+                                result_order=myHttpConnect.urlconnect_ordermanage(email, pwd, "2016-01-01", "", "", "", "", cardnum,3,1);
                                 handler.sendEmptyMessage(2);
 
                             } else {
@@ -305,19 +327,11 @@ public class ConsignCard extends Fragment implements View.OnClickListener {
                 break;
             //刷新
             case R.id.iv_consigncard_refrush:
-                //点击提交按钮，记录当前日期
-                SimpleDateFormat dateFormat0 = new SimpleDateFormat("yyyy-MM-dd");
-                date = dateFormat0.format(new java.util.Date());
-                //获取时间
-                SimpleDateFormat timeFormat0 = new SimpleDateFormat("HH:mm:ss");
-                time = timeFormat0.format(new java.util.Date());
-                //结合
-                date=date+"T"+time;
-                Log.e("date:",date);
+
                 new Thread(){
                     public void run(){
                         if (myHttpConnect.isConnnected(getActivity().getApplication())) {
-                            result_order=myHttpConnect.urlconnect_ordermanage(email, pwd, "2016-01-01", date, "", "", "", cardnum,3,1);
+                            result_order=myHttpConnect.urlconnect_ordermanage(email, pwd, "2016-01-01", "", "", "", "", cardnum,3,1);
                             handler.sendEmptyMessage(4);
 
                         } else {

@@ -40,7 +40,8 @@ import com.buuyou.other.MyActivity;
  */
 public class mineFragment extends Fragment implements View.OnClickListener {
    private String result;
-    private TextView tv_fragmentmine_id,name;
+    public TextView tv_fragmentmine_id;
+    public static TextView minefragment_name;
     private EditText et_fragmentmine_pwd;
     private Button exit;
     private SharedPreferences sp;
@@ -106,9 +107,10 @@ public class mineFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        sp=getActivity().getSharedPreferences("data",Context.MODE_PRIVATE);
+
 
         View view=inflater.inflate(R.layout.fragment_mine, container, false);
+        sp=getActivity().getSharedPreferences("data",Context.MODE_PRIVATE);
         tv_fragmentmine_id=(TextView)view.findViewById(R.id.tv_fragmentmine_id);
         et_fragmentmine_pwd=(EditText)view.findViewById(R.id.et_fragmentmine_pwd);
         basicinfo= (LinearLayout) view.findViewById(R.id.llayout_fragmentmine_basicinfo);
@@ -119,9 +121,9 @@ public class mineFragment extends Fragment implements View.OnClickListener {
         channelrate= (LinearLayout) view.findViewById(R.id.llayout_fragmentmine_channelRate);
         about= (LinearLayout) view.findViewById(R.id.llayout_fragmentmine_about);
         versionupdate= (LinearLayout) view.findViewById(R.id.llayout_fragmentmine_versionupdate);
-        name= (TextView) view.findViewById(R.id.tv_fragmentmine_name);
+        minefragment_name= (TextView) view.findViewById(R.id.tv_fragmentmine_name);
         exit=(Button)view.findViewById(R.id.exit);
-        name.setText(sp.getString("name",null));
+        minefragment_name.setText(sp.getString("name",null));
         tv_fragmentmine_id.setText("ID:"+sp.getString("email",null));
         et_fragmentmine_pwd.setText(sp.getString("password", null));
         et_fragmentmine_pwd.setKeyListener(null);

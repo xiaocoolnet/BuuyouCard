@@ -42,7 +42,7 @@
     <LinearLayout
         android:background="#fff"
         android:layout_width="match_parent"
-        android:layout_height="101dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         >
         <TextView
@@ -69,14 +69,16 @@
             android:textSize="12sp"
             android:textColor="#A4A4A4"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
             android:text="提现中金额+余额"/>
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginTop="11dp"
-        android:background="#FFFFFF">
+        android:background="#FFFFFF"
+        android:id="@+id/rlayout_moneyinfo_applyformoney">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -152,82 +154,90 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dp"
-            >
-            <ImageView
-                android:layout_width="11dp"
-                android:layout_height="11dp"
-                android:src="@mipmap/redspot"/>
-            <TextView
-                android:layout_width="wrap_content"
+            android:layout_marginTop="25dp">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="可用余额"
-                android:textSize="12dp"
-                android:textColor="#A4A4A4"
-                android:layout_marginLeft="10dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+
+
+                >
+                <ImageView
+                    android:layout_width="11dp"
+                    android:layout_height="11dp"
+                    android:src="@mipmap/redspot"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="可用余额"
+                    android:textSize="12dp"
+                    android:textColor="#A4A4A4"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_moneyinfo_availablemoney"
+                    android:text="100.0"
+                    android:textColor="#202020"
+                    android:textSize="12dp"
+                    android:layout_marginLeft="27dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_moneyinfo_availablemoney"
-                android:text="100.0"
-                android:textColor="#202020"
-                android:textSize="12dp"
-                android:layout_marginLeft="27dp"/>
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="11dp"
+                    android:layout_height="11dp"
+                    android:src="@mipmap/purplespot"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="可提现余额"
+                    android:textSize="12dp"
+                    android:textColor="#A4A4A4"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_moneyinfo_usermoney"
+                    android:text="100.0"
+                    android:textColor="#202020"
+                    android:textSize="12dp"
+                    android:layout_marginLeft="15dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp">
+                <ImageView
+                    android:layout_width="11dp"
+                    android:layout_height="11dp"
+                    android:src="@mipmap/bluespot"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="提现中余额"
+                    android:textSize="12dp"
+                    android:textColor="#A4A4A4"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100.0"
+                    android:textColor="#202020"
+                    android:textSize="12dp"
+                    android:layout_marginLeft="15dp"
+                    android:id="@+id/tv_moneyinfo_withdrawmoney"/>
+            </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp"
-            android:layout_gravity="center_horizontal">
-            <ImageView
-                android:layout_width="11dp"
-                android:layout_height="11dp"
-                android:src="@mipmap/purplespot"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="可提现余额"
-                android:textSize="12dp"
-                android:textColor="#A4A4A4"
-                android:layout_marginLeft="10dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_moneyinfo_usermoney"
-                android:text="100.0"
-                android:textColor="#202020"
-                android:textSize="12dp"
-                android:layout_marginLeft="15dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp">
-            <ImageView
-                android:layout_width="11dp"
-                android:layout_height="11dp"
-                android:src="@mipmap/bluespot"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="提现中余额"
-                android:textSize="12dp"
-                android:textColor="#A4A4A4"
-                android:layout_marginLeft="10dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="100.0"
-                android:textColor="#202020"
-                android:textSize="12dp"
-                android:layout_marginLeft="15dp"
-                android:id="@+id/tv_moneyinfo_withdrawmoney"/>
-        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

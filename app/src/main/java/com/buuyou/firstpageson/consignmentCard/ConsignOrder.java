@@ -96,7 +96,7 @@ public class ConsignOrder extends Fragment implements View.OnClickListener {
                     }
                     break;
                 case 3:
-                    Toast.makeText(getActivity().getApplication(), "请填写完整信息", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplication(), "请选择开始日期", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -204,11 +204,10 @@ public class ConsignOrder extends Fragment implements View.OnClickListener {
                     String str_type=tv_type.getText().toString().trim();
                     String str_status=tv_status.getText().toString().trim();
                     String str_begintime=MyActivity.getBegindate(tv_begindate);
-                    String str_endtime=MyActivity.getEnddate(tv_enddate);
+                    String str_endtime=tv_enddate.getText().toString().trim();
                     int statusid;
-
                     public void run(){
-                        if(str_num.equals("")||str_type.equals("请选择")||str_begintime.equals("选择日期")||str_endtime.equals("选择日期")){
+                        if(tv_begindate.getText().toString().trim().equals("选择日期")){
                             handler.sendEmptyMessage(3);
 
                         }else{
@@ -221,6 +220,11 @@ public class ConsignOrder extends Fragment implements View.OnClickListener {
                                     statusid=2;
                                 else if(str_status.equals("处理中"))
                                     statusid=0;
+                                if (str_endtime.equals("选择日期")){
+                                    str_endtime="";
+                                }else{
+                                    str_endtime=MyActivity.getEnddate(tv_enddate);
+                                }
                                 Log.e("+++++++", str_begintime + "----" + str_endtime);
                                 result=myHttpConnect.urlconnect_ordermanage(email, pwd, str_begintime, str_endtime, "", "", "", str_num,statusid,1);
                                 editor.putString("result", result);

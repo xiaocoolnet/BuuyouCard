@@ -5,23 +5,15 @@
     android:orientation="vertical"
     android:background="#F5F3F0"
     tools:context="com.buuyou.fragment.mineFragment">
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="#FF9100"
+        android:text="我的"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
         android:gravity="center"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="我的"
-            android:textSize="16dp"
-            android:textColor="#FFFFFF"
-            android:id="@+id/tv_fragmentfirstpage_title"
-
-            />
-    </LinearLayout>
+        />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="101dp"

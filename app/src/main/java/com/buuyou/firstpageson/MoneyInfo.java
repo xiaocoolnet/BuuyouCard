@@ -7,10 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.buuyou.buuyoucard.R;
+import com.buuyou.firstpageson.financemanage.Finance;
+import com.buuyou.other.MyActivity;
 import com.echo.holographlibrary.PieGraph;
 import com.echo.holographlibrary.PieSlice;
 
@@ -24,6 +27,7 @@ public class MoneyInfo extends AppCompatActivity implements View.OnClickListener
     private int available=0,user=0,withdraw=0;
     private ImageView back;
     private SharedPreferences sp;
+    private RelativeLayout applyformoney;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class MoneyInfo extends AppCompatActivity implements View.OnClickListener
         tv_available= (TextView) findViewById(R.id.tv_moneyinfo_availablemoney);
         tv_user= (TextView) findViewById(R.id.tv_moneyinfo_usermoney);
         tv_withdraw= (TextView) findViewById(R.id.tv_moneyinfo_withdrawmoney);
+        applyformoney= (RelativeLayout) findViewById(R.id.rlayout_moneyinfo_applyformoney);
         back= (ImageView) findViewById(R.id.iv_moneyinfo_back);
         back.setOnClickListener(this);
             try {
@@ -54,6 +59,12 @@ public class MoneyInfo extends AppCompatActivity implements View.OnClickListener
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        applyformoney.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyActivity.getIntent(MoneyInfo.this, Finance.class);
+            }
+        });
 
         available=(int)(Double.valueOf(availablemoney)*1000);
         user=(int)(Double.valueOf(usermoney)*1000);

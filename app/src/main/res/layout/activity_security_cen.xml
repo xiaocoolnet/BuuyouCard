@@ -12,13 +12,18 @@
         android:layout_height="45dp"
         android:background="#FF9100"
         >
-        <ImageView
-            android:layout_width="10dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/back"
-            android:id="@+id/iv_security_back"
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="16dp"/>
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_security_back">
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/back"
+                />
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,19 +32,17 @@
             android:textColor="#FFFFFF"
             android:id="@+id/tv_basicinfo_title"
             android:layout_toRightOf="@+id/iv_security_back"
-            android:layout_marginTop="14dp"
-            android:layout_marginLeft="20dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="编辑"
-            android:textSize="18sp"
-            android:layout_alignParentRight="true"
-            android:textColor="#FFFFFF"
-            android:layout_marginTop="14dp"
-            android:layout_marginRight="14dp"
-            />
+            android:layout_centerVertical="true"            />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="编辑"-->
+            <!--android:textSize="18sp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:textColor="#FFFFFF"-->
+            <!--android:layout_marginTop="14dp"-->
+            <!--android:layout_marginRight="14dp"-->
+            <!--/>-->
     </RelativeLayout>
 
     <RelativeLayout

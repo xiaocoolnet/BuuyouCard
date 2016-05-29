@@ -1,5 +1,6 @@
 package com.buuyou.HttpConnect;
 
+import android.app.Service;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -127,6 +128,34 @@ public class myHttpConnect {
     //银行信息
     public static String urlconnect_banklist(String email,String password){
         String url=UrlPath.NET_API+UrlPath.banklistType+UrlPath.data+email+","+password;
+        String urlresult=HttpResult(url);
+        Log.e("log:",urlresult);
+        return urlresult;
+    }
+    //申请提现
+    public static String urlconnect_applyformoney(String email,String password,String withdrawmoney,String safecode){
+        String url=UrlPath.NET_API+UrlPath.userwithdrawType+UrlPath.data+email+","+password+","+withdrawmoney+","+safecode;
+        String urlresult=HttpResult(url);
+        Log.e("log:",urlresult);
+        return urlresult;
+    }
+    //提现查询
+    public static String urlconnect_findmoney(String email,String password,String status){
+        String url=UrlPath.NET_API+UrlPath.userwithdrawType+UrlPath.data+email+","+password+","+status;
+        String urlresult=HttpResult(url);
+        Log.e("log:",urlresult);
+        return urlresult;
+    }
+    //修改基本信息
+    public static String urlconnect_changebasicinfo(String email,String password,String name,String qq,String webname,String weburl){
+        String url=UrlPath.NET_API+UrlPath.changebasicinfoType+UrlPath.data+email+","+password+","+name+","+qq+","+webname+","+weburl;
+        String urlresult=HttpResult(url);
+        Log.e("log:",urlresult);
+        return urlresult;
+    }
+    //修改账户信息
+    public static String urlconnect_changeaccountinfo(String email,String password,int bankid,String bankaccount,String bankcard,String bankaddress){
+        String url=UrlPath.NET_API+UrlPath.changeaccountinfoType+UrlPath.data+email+","+password+","+bankid+","+bankaccount+","+bankcard+","+bankaddress;
         String urlresult=HttpResult(url);
         Log.e("log:",urlresult);
         return urlresult;

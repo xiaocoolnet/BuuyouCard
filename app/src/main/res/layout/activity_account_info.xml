@@ -12,13 +12,18 @@
         android:layout_height="45dp"
         android:background="#FF9100"
         >
-        <ImageView
-            android:layout_width="10dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/back"
-            android:id="@+id/iv_accountinfo_back"
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="16dp"/>
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_accountinfo_back">
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/back"
+                />
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,8 +32,7 @@
             android:textColor="#FFFFFF"
             android:id="@+id/tv_basicinfo_title"
             android:layout_toRightOf="@+id/iv_accountinfo_back"
-            android:layout_marginTop="14dp"
-            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -37,8 +41,9 @@
             android:textSize="18sp"
             android:layout_alignParentRight="true"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="14dp"
+            android:layout_centerVertical="true"
             android:layout_marginRight="14dp"
+            android:id="@+id/tv_accountinfo_edit"
             />
     </RelativeLayout>
 
@@ -59,22 +64,29 @@
             android:textSize="15sp"
             android:layout_marginLeft="15dp"
             />
-        <TextView
-            android:layout_toRightOf="@id/email"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="请选择"
-            android:textSize="15sp"
+            android:layout_toRightOf="@id/email"
             android:layout_marginLeft="20dp"
-            android:id="@+id/tv_accountinfo_bankname"
-            />
-        <ImageView
-            android:layout_width="9dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/next"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            />
+            android:id="@+id/rlayout_accountinfo_choosebank">
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请选择"
+                android:textSize="15sp"
+                android:id="@+id/tv_accountinfo_bankname"
+                />
+            <ImageView
+                android:layout_width="9dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/next"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                />
+        </RelativeLayout>
+
     </RelativeLayout>
 
     <LinearLayout
@@ -92,13 +104,16 @@
             android:textSize="15sp"
             android:layout_marginLeft="15dp"
             />
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="布优点卡"
             android:textSize="15sp"
             android:layout_marginLeft="20dp"
             android:id="@+id/tv_accountinfo_bankaccount"
+            android:background="@null"
+            android:singleLine="true"
+            android:focusable="false"
             />
     </LinearLayout>
     <LinearLayout
@@ -116,13 +131,16 @@
             android:textSize="15sp"
             android:layout_marginLeft="15dp"
             />
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="123456789987456"
             android:textSize="15sp"
             android:layout_marginLeft="20dp"
             android:id="@+id/tv_accountinfo_bankcard"
+            android:background="@null"
+            android:singleLine="true"
+            android:focusable="false"
             />
     </LinearLayout>
     <LinearLayout
@@ -151,6 +169,7 @@
             android:singleLine="true"
             android:focusable="false"
             android:id="@+id/et_accountinfo_bankaddress"
+
             />
     </LinearLayout>
 </LinearLayout>

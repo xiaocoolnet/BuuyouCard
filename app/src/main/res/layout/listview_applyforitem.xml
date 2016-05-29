@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="68dp">
+
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:text="1234657890"
+        android:textColor="#000000"
+        android:textSize="15dp"/>
+    <TextView
+        android:id="@+id/text_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="13dp"
+        android:layout_marginRight="9dp"
+        android:text="2016-04-08 16:43"
+        android:textSize="11sp" />
+    <TextView
+        android:id="@+id/subnum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/text_time"
+        android:layout_below="@id/text_time"
+        android:layout_marginTop="17dp"
+        android:text="提现中"
+        android:textSize="13sp"
+        android:textColor="#E60012"/>
+
+    <TextView
+        android:id="@+id/tv_applyforitem_temp1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="10dp"
+        android:text="提现金额："
+        android:textColor="#303030"
+        android:textSize="12sp" />
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="120元"
+        android:layout_toRightOf="@id/tv_applyforitem_temp1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:textSize="12sp"
+        android:textColor="#303030"
+        android:id="@+id/tv_applyforitem_money"/>
+    <TextView
+        android:id="@+id/tv_applyforitem_temp2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/tv_applyforitem_money"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="手续费："
+        android:textColor="#303030"
+        android:textSize="12sp" />
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2.01元"
+        android:layout_toRightOf="@id/tv_applyforitem_temp2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:textSize="12sp"
+        android:textColor="#303030"
+        />
+</RelativeLayout>

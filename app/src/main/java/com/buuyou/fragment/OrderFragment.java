@@ -78,6 +78,7 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
     private EditText et_ordernum,et_cardnum;
     private String result;
     private SharedPreferences sp;
+    String endtime = null;
     private int orderstatus=1;
     String ordertype;
     List<String> str=new ArrayList<String>();
@@ -90,7 +91,7 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case 1:
-                    Toast.makeText(getActivity(), "请输入完整信息", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "请选择开始时间", Toast.LENGTH_SHORT).show();
                     break;
                 case 2:
                     try {
@@ -255,7 +256,7 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
                 final String email=sp.getString("email",null);
                 final String pwd=sp.getString("clearpwd", null);
                 final String begintime=MyActivity.getBegindate(begindate);
-                final String endtime=MyActivity.getEnddate(enddate);
+
                 final String ordernum=et_ordernum.getText().toString().trim();
                 final String cardnum=et_cardnum.getText().toString().trim();
 
@@ -271,15 +272,21 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
                     ordertype=5+"";
                 else if(type.getText().toString().trim().equals("所有类型"))
                     ordertype="";
-                Log.e("+++", orderstatus + "");
+                if(enddate.getText().toString().trim().equals("选择日期")){
+                    endtime="";
+                }else{
+                    endtime=MyActivity.getEnddate(enddate);
+                }
+
+                Log.e("+++",orderstatus+"");
                 new Thread(){
                     public void run(){
-                        if(ordernum.equals("")||cardnum.equals("")||begindate.getText().toString().equals("选择日期")||enddate.getText().toString().equals("选择日期")){
+                        if(begindate.getText().toString().equals("选择日期")){
                             handler.sendEmptyMessage(1);
                         }else{
                             if (myHttpConnect.isConnnected(getActivity())) {
                                 //点单编号记得改回来！！！！
-                                result=myHttpConnect.urlconnect_ordermanage(email, pwd, begintime, endtime, "", ordertype, "", cardnum, orderstatus, 1);
+                                result=myHttpConnect.urlconnect_ordermanage(email, pwd, begintime, endtime, ordernum, ordertype, "", cardnum, orderstatus, 1);
                                 handler.sendEmptyMessage(2);
 
                             } else {

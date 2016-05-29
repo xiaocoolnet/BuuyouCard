@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 
 public class LoginLog extends AppCompatActivity {
     ListView listview;
-    private ImageView back;
+    private LinearLayout back;
     private String email,pwd,data_result;
     private int num;
     private TextView address,time,ip;
@@ -84,7 +85,7 @@ public class LoginLog extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_log);
 
-        back= (ImageView) findViewById(R.id.iv_loginlog_back);
+        back= (LinearLayout)findViewById(R.id.iv_loginlog_back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

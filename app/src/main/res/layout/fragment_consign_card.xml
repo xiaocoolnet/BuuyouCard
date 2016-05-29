@@ -158,9 +158,14 @@
             android:layout_marginRight="15dp"
             android:id="@+id/iv_consigncard_refrush"/>
     </RelativeLayout>
-    <ListView
+    <!--<ListView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/listview"></ListView>-->
+    <com.buuyou.firstpageson.consignmentCard.RefreshListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listview"></ListView>
+        android:layout_height="match_parent"
+        android:id="@+id/listview">
+    </com.buuyou.firstpageson.consignmentCard.RefreshListView>
 
 </LinearLayout>

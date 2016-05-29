@@ -19,6 +19,8 @@ public class Finance extends AppCompatActivity implements View.OnClickListener {
     private RelativeLayout left,center,right;
     private TextView tv_left,tv_center,tv_right;
     private LinearLayout leftline,centerline,rightline;
+    private String status;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class Finance extends AppCompatActivity implements View.OnClickListener {
         leftline= (LinearLayout) findViewById(R.id.llayout_finance_leftline);
         centerline= (LinearLayout) findViewById(R.id.llayout_finance_centerline);
         rightline= (LinearLayout) findViewById(R.id.llayout_finance_rightline);
+//        tvBackName.setText(data.getString("BankName"));
+
         back.setOnClickListener(this);
         left.setOnClickListener(this);
         center.setOnClickListener(this);
@@ -66,11 +70,21 @@ public class Finance extends AppCompatActivity implements View.OnClickListener {
                 init();
                 tv_center.setTextColor(getResources().getColor(R.color.colororange));
                 centerline.setBackgroundColor(getResources().getColor(R.color.colororange));
+                FragmentManager fm2=getFragmentManager();
+                FragmentTransaction t2=fm2.beginTransaction();
+                ApplyforItem m2=new ApplyforItem();
+                t2.replace(R.id.fragment_finance, m2);
+                t2.commit();
                 break;
             case R.id.rlayout_finance_right:
                 init();
                 tv_right.setTextColor(getResources().getColor(R.color.colororange));
                 rightline.setBackgroundColor(getResources().getColor(R.color.colororange));
+                FragmentManager fm3=getFragmentManager();
+                FragmentTransaction t3=fm3.beginTransaction();
+                ApplyforItem m3=new ApplyforItem();
+                t3.replace(R.id.fragment_finance, m3);
+                t3.commit();
                 break;
         }
     }

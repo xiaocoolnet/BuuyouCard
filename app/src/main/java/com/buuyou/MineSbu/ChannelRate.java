@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +30,7 @@ public class ChannelRate extends AppCompatActivity {
     private ListView listview;
    private String emaile,pwd,data_result;
     private TextView lefttext,centertext,righttext;
-    private ImageView back;
+    private LinearLayout back;
    private int num;
     ArrayList<String> listname=new ArrayList<String>();
     ArrayList<String> listrate=new ArrayList<String>();
@@ -93,7 +94,7 @@ public class ChannelRate extends AppCompatActivity {
         sp = getSharedPreferences("data", Context.MODE_PRIVATE);
         emaile=sp.getString("email", null);
         pwd=sp.getString("clearpwd", null);
-        back= (ImageView) findViewById(R.id.iv_channelrate_back);
+        back= (LinearLayout) findViewById(R.id.iv_channelrate_back);
 
         new Thread(){
             public void run(){

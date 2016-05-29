@@ -5,13 +5,27 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.buuyou.HttpConnect.myHttpConnect;
 import com.buuyou.buuyoucard.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,10 +59,70 @@ public class ApplyforMoney extends Fragment implements View.OnClickListener {
      * @param param2 Parameter 2.
      * @return A new instance of fragment ApplyforMoney.
      */
-    private TextView bankname,bankcard,bankaccount;
+    private TextView bankcard,bankaccount;
     private EditText bankaddress;
+    private TextView bankname;
     private SharedPreferences sp;
+    private TextView availablemoney,usermoney;
     private EditText applyformoney,safecode;
+    private Button submit;
+    private String result;
+    private String result_bank,result_temp;
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 1:
+                    Toast.makeText(getActivity(),"网络连接错误",Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+                    try {
+                        JSONObject jsonObject=new JSONObject(result);
+                        if (jsonObject.getString("status").equals("1")){
+                            Toast.makeText(getActivity(),"提现成功！",Toast.LENGTH_LONG).show();
+                        }else{
+                            String message=jsonObject.getString("msg");
+                            if(message.equals("No Record"))
+                                Toast.makeText(getActivity(),"未查到相关记录",Toast.LENGTH_SHORT).show();
+                            else if(message.equals("SafeCode Error"))
+                                Toast.makeText(getActivity(),"安全码错误",Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 3:
+                    try {
+                        JSONObject json1=new JSONObject(result_bank);//解析银行信息，取银行名
+                        JSONObject json2=new JSONObject(result_temp);//解析财务信息，取可用余额和可提现余额
+                        JSONArray temp1=json1.getJSONArray("data");
+                        JSONArray temp2=json2.getJSONArray("data");
+                        SharedPreferences.Editor editor=sp.edit();
+                        for(int i=0;i<temp1.length();i++){
+                            JSONObject data= (JSONObject) temp1.get(i);
+                            if(data.getString("BankID").equals(sp.getString("bankID",null))){
+                                editor.putString("bankname", data.getString("BankName"));
+
+                                editor.commit();
+                                Log.e("+++", sp.getString("bankname", null));
+                                bankname.setText(sp.getString("bankname", null));
+                            }
+
+                        }
+                        for(int j=0;j<temp2.length();j++){
+                            JSONObject data= (JSONObject) temp2.get(j);
+                            editor.putString("availablemoney", data.getString("AvailableBalance"));
+                            editor.putString("usermoney",data.getString("UserMoney"));
+                            editor.commit();
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+            }
+        }
+    };
     // TODO: Rename and change types and number of parameters
     public static ApplyforMoney newInstance(String param1, String param2) {
         ApplyforMoney fragment = new ApplyforMoney();
@@ -73,16 +147,37 @@ public class ApplyforMoney extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_applyfor_money, container, false);
         sp=getActivity().getSharedPreferences("data",Context.MODE_PRIVATE);
+        new Thread(){
+            public void run(){
+                if(myHttpConnect.isConnnected(getActivity())){
+                    result_bank=myHttpConnect.urlconnect_banklist(sp.getString("email", null), sp.getString("clearpwd", null));
+                    result_temp=myHttpConnect.urlconnect_moneyinfo(sp.getString("email", null), sp.getString("clearpwd", null));
+                    handler.sendEmptyMessage(3);
+                }
+                else{
+                    //网络连接错误
+                    handler.sendEmptyMessage(1);
+                }
+            }
+        }.start();
+
         bankaccount= (TextView) v.findViewById(R.id.tv_applyformoney_bankaccount);
         bankcard= (TextView) v.findViewById(R.id.tv_applyformoney_bankcard);
         bankaddress= (EditText) v.findViewById(R.id.et_applyformoney_bankaddress);
         bankname= (TextView) v.findViewById(R.id.tv_applyformoney_bankname);
         applyformoney= (EditText) v.findViewById(R.id.et_applyformoney_money);
         safecode= (EditText) v.findViewById(R.id.et_applyformoney_safecode);
+        availablemoney= (TextView) v.findViewById(R.id.tv_applyformoney_availablemoney);
+        usermoney= (TextView) v.findViewById(R.id.tv_applyformoney_usermoney);
+        submit= (Button) v.findViewById(R.id.bt_applyformoney_submit);
         bankaddress.setText(sp.getString("bankaddress",null));
         bankcard.setText(sp.getString("bankcard",null));
-        bankaccount.setText(sp.getString("bankaccount",null));
-        bankname.setText(sp.getString("bankname",null));
+        bankaccount.setText(sp.getString("bankaccount", null));
+        bankname.setText(sp.getString("bankname", null));
+
+        availablemoney.setText(sp.getString("availablemoney",null));
+        usermoney.setText(sp.getString("usermoney",null));
+        submit.setOnClickListener(this);
         return v;
     }
 
@@ -113,8 +208,52 @@ public class ApplyforMoney extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.bt_applyformoney_submit:
+                final String str_money,str_safecode;
+                str_money=applyformoney.getText().toString().trim();
+                str_safecode=safecode.getText().toString().trim();
+                //判断提现金额和安全码是否为空
+                if(!str_money.equals("")&&!str_safecode.equals("")){
+                    //判断提现金额是否为整数
+                    if(isNum(str_money)){
+                        //判断提现金额是否大于余额
+                        if((Double.parseDouble(str_money)+2.0)<=Double.parseDouble(sp.getString("usermoney",null))){
+                            //判断提现金额是否满足最低提现金额
+                            if(Double.parseDouble(str_money)>=100){
+                               new Thread(){
+                                   public void run(){
+                                       if(myHttpConnect.isConnnected(getActivity())){
+                                           result=myHttpConnect.urlconnect_applyformoney(sp.getString("email",null),sp.getString("clearpwd",null),str_money,str_safecode);
+                                           handler.sendEmptyMessage(2);
+                                       }else{
+                                           handler.sendEmptyMessage(1);
+                                       }
+                                   }
+                               }.start();
+                            }else{
+                                Toast.makeText(getActivity(),"低于最低提现金额!",Toast.LENGTH_SHORT).show();
+                            }
 
+                        }else{
+                            Toast.makeText(getActivity(),"超出可结算余额!",Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(getActivity(),"输入的提现金额为整数!",Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(getActivity(),"请输入完整数据!",Toast.LENGTH_SHORT).show();
+                }
+
+                break;
         }
+    }
+    public Boolean isNum(String str){
+        Pattern pattern = Pattern.compile("[0-9]*");
+        Matcher isNum = pattern.matcher(str);
+        if(!isNum.matches()){
+            return false;
+        }
+        return true;
     }
 
     /**

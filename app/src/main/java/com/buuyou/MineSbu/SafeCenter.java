@@ -7,11 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.buuyou.buuyoucard.R;
 import com.buuyou.other.MyActivity;
+import com.echo.holographlibrary.Line;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,7 +21,7 @@ import org.json.JSONObject;
 
 public class SafeCenter extends AppCompatActivity implements View.OnClickListener {
    private TextView safecode,email,phone,identity,address;
-    private ImageView back;
+    private LinearLayout back;
     private SharedPreferences sp;
     private String result;
 
@@ -33,7 +35,7 @@ public class SafeCenter extends AppCompatActivity implements View.OnClickListene
         phone= (TextView) findViewById(R.id.tv_security_phone);
         identity= (TextView) findViewById(R.id.tv_security_identity);
         address= (TextView) findViewById(R.id.tv_security_address);
-        back= (ImageView) findViewById(R.id.iv_security_back);
+        back= (LinearLayout) findViewById(R.id.iv_security_back);
         back.setOnClickListener(this);
         try {
             JSONObject json=new JSONObject(sp.getString("result",null));

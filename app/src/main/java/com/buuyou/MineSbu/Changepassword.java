@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.buuyou.HttpConnect.myHttpConnect;
@@ -22,7 +23,7 @@ import org.json.JSONObject;
 
 public class Changepassword extends AppCompatActivity {
 
-    private ImageView back;
+    private LinearLayout back;
     private Button sure;
     private EditText et_newpassword,et_againpassword,et_email,et_oldpassword;
     private String email,emailsure,oldpwd,newpwd,againnewpwd,result;
@@ -69,7 +70,7 @@ public class Changepassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_changepassword);
         sp=getSharedPreferences("data", Context.MODE_PRIVATE);
-        back= (ImageView) findViewById(R.id.iv_changepassword_back);
+        back= (LinearLayout) findViewById(R.id.iv_changepassword_back);
         sure= (Button) findViewById(R.id.bt_changepassword_sure);
         et_email= (EditText) findViewById(R.id.et_changepassword_email);
         et_oldpassword= (EditText) findViewById(R.id.et_changepassword_oldpwd);
