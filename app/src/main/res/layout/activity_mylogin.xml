@@ -6,6 +6,7 @@
     tools:context="com.buuyou.buuyoucard.Mylogin"
     android:background="@mipmap/logbac"
     android:orientation="vertical"
+    android:id="@+id/activity_login"
     >
     <!-- LOGO-->
 <RelativeLayout

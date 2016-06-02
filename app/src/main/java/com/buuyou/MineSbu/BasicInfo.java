@@ -1,6 +1,7 @@
 package com.buuyou.MineSbu;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,7 +32,7 @@ public class BasicInfo extends AppCompatActivity implements View.OnClickListener
     RelativeLayout emailcg,phonecg;
     private TextView id,email,phone;
     private EditText name,qq,webname,weburl;
-    private LinearLayout back;
+    private LinearLayout back,activity;
     private TextView edit;
     private String result;
     private SharedPreferences sp;
@@ -92,6 +94,7 @@ public class BasicInfo extends AppCompatActivity implements View.OnClickListener
         qq= (EditText) findViewById(R.id.tv_basicinfo_qq);
         webname= (EditText) findViewById(R.id.tv_basicinfo_webname);
         weburl= (EditText) findViewById(R.id.tv_basicinfo_weburl);
+        activity= (LinearLayout) findViewById(R.id.llayout_basicinfo_activity);
         //从data文件中获取基本信息中需要的数据
         id.setText(sp.getString("userid",null));
         name.setText(sp.getString("name",null));
@@ -143,6 +146,12 @@ public class BasicInfo extends AppCompatActivity implements View.OnClickListener
                         }
                     }.start();
                 }
+                break;
+            case R.id.llayout_basicinfo_activity:
+                InputMethodManager imm = (InputMethodManager)
+                        getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                break;
         }
     }
 }

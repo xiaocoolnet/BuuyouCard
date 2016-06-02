@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.buuyou.firstpageson.ordermanagerment.Order">
+    tools:context="com.buuyou.firstpageson.ordermanagerment.Order"
+    android:id="@+id/llayout_order_activity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"

@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     tools:context="com.buuyou.MineSbu.BasicInfo"
     android:background="#F4F4F5"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/llayout_basicinfo_activity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -61,11 +62,13 @@
             />
   <TextView
       android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:layout_height="51dp"
+      android:gravity="center_vertical"
       android:text="(商户ID}"
       android:textSize="15sp"
       android:layout_marginLeft="49dp"
       android:id="@+id/tv_basicinfo_id"
+
       />
     </LinearLayout>
     <LinearLayout
@@ -85,7 +88,8 @@
             />
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="51dp"
+            android:gravity="center_vertical"
             android:text="(66666}"
             android:textSize="15sp"
             android:layout_marginLeft="49dp"
@@ -180,7 +184,8 @@
             />
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="51dp"
+            android:gravity="center_vertical"
             android:text="(66666666}"
             android:textSize="15sp"
             android:layout_marginLeft="49dp"
@@ -207,7 +212,8 @@
             />
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="51dp"
+            android:gravity="center_vertical"
             android:text="布优点卡"
             android:textSize="15sp"
             android:layout_marginLeft="49dp"
@@ -234,7 +240,8 @@
             />
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="51dp"
+            android:gravity="center_vertical"
             android:text="www.buyouxiaola.com"
             android:textSize="15sp"
             android:layout_marginLeft="49dp"

@@ -9,9 +9,11 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.buuyou.HttpConnect.myHttpConnect;
@@ -28,6 +30,7 @@ public class Findpassword extends AppCompatActivity {
     private Button bt_next;
     private Button bt_yanzhengma;
     private ImageView iv_back;
+    private LinearLayout activity;
     private String myemail,myphone,myvaliCode,result,mynewpass,result_data,getdata;
     SharedPreferences sp;
     //设置倒计时时间
@@ -100,7 +103,15 @@ public class Findpassword extends AppCompatActivity {
         bt_next= (Button) findViewById(R.id.bt_findpassword_next);
         bt_yanzhengma= (Button) findViewById(R.id.getvaliCode);
         iv_back= (ImageView) findViewById(R.id.iv_findpassword_back);
-
+        activity= (LinearLayout) findViewById(R.id.llayout_findpassword_activity);
+        activity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager)
+                        getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
+        });
         //跳转到下一个界面
         bt_next.setOnClickListener(new View.OnClickListener() {
             @Override

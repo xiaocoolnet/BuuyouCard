@@ -10,8 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ public class Mylogin extends AppCompatActivity {
     String result_data;
     SharedPreferences sp;
     private String myphone;
+    private LinearLayout activity;
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -81,6 +84,7 @@ public class Mylogin extends AppCompatActivity {
                                 editor.putString("clearpwd",pass.getText().toString());
                                 editor.putString("webname",temp.getString("WebName"));
                                 editor.putString("weburl",temp.getString("WebUrl"));
+                                editor.putString("bankname",temp.getString("BankName"));
                                 editor.commit();
                             }
                             finish();
@@ -129,7 +133,7 @@ public class Mylogin extends AppCompatActivity {
         phone = (EditText) findViewById(R.id.phone);
         pass = (EditText) findViewById(R.id.pass);
         login = (Button) findViewById(R.id.login);
-
+        activity= (LinearLayout) findViewById(R.id.activity_login);
         login.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -172,6 +176,15 @@ public class Mylogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MyActivity.getIntent(Mylogin.this, Findpassword.class);
+            }
+        });
+        //点击空白处收回键盘
+        activity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager)
+                        getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
         });
     }

@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -36,9 +37,11 @@ public class MyActivity {
         date = textView.getText().toString().trim();
         return date+"T23:59:59";
     }
+    //得到时间
     public static String getTime(String time){
         String []a=time.split("T");
         String []b=a[1].split("\\.");
         return a[0]+" "+b[0];
     }
+
 }

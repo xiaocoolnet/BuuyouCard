@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,7 @@ import com.buuyou.HttpConnect.myHttpConnect;
 import com.buuyou.buuyoucard.R;
 import com.buuyou.other.Dropdown;
 import com.buuyou.other.MyActivity;
+import com.echo.holographlibrary.Line;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,6 +42,7 @@ public class Order extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout leftline,centerline,rightline;
     private ImageView back;
     private LinearLayout choosetype,choosechannel,choosebegindate,chooseenddate;
+    private LinearLayout activity;
     private TextView type,channel,begindate,enddate;
     private Button search;
     private EditText et_ordernum,et_cardnum;
@@ -112,7 +115,7 @@ public class Order extends AppCompatActivity implements View.OnClickListener {
             centerline= (LinearLayout) findViewById(R.id.llayout_order_centerline);
             rightline= (LinearLayout) findViewById(R.id.llayout_order_rightline);
             back= (ImageView) findViewById(R.id.iv_order_back);
-
+activity= (LinearLayout) findViewById(R.id.llayout_order_activity);
             sp=getSharedPreferences("data", Context.MODE_PRIVATE);
             choosetype= (LinearLayout) findViewById(R.id.llayout_order_choosetype);
             choosechannel= (LinearLayout) findViewById(R.id.llayout_order_choosechannel);
@@ -134,6 +137,7 @@ public class Order extends AppCompatActivity implements View.OnClickListener {
             choosetype.setOnClickListener(this);
             choosebegindate.setOnClickListener(this);
             chooseenddate.setOnClickListener(this);
+            activity.setOnClickListener(this);
     }
 
     @Override
@@ -208,7 +212,7 @@ public class Order extends AppCompatActivity implements View.OnClickListener {
                     endtime=MyActivity.getEnddate(enddate);
                 }
 
-                Log.e("+++",orderstatus+"");
+                Log.e("+++", orderstatus + "");
                 new Thread(){
                     public void run(){
                         if(begindate.getText().toString().equals("选择日期")){
@@ -227,6 +231,11 @@ public class Order extends AppCompatActivity implements View.OnClickListener {
                     }
                 }.start();
 
+                break;
+            case R.id.llayout_order_activity:
+                InputMethodManager imm = (InputMethodManager)
+                        getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 break;
         }
 

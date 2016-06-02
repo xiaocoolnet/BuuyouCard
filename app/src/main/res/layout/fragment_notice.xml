@@ -25,13 +25,13 @@
             android:layout_marginTop="14dp"
             android:layout_marginLeft="165dp"
             />
-        <ImageView
-            android:layout_width="18dp"
-            android:layout_height="21dp"
-            android:src="@mipmap/clean"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="12dp"/>
+        <!--<ImageView-->
+            <!--android:layout_width="18dp"-->
+            <!--android:layout_height="21dp"-->
+            <!--android:src="@mipmap/clean"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:layout_marginTop="12dp"/>-->
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"

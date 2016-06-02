@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -62,7 +63,7 @@ public class ConsignOrder extends Fragment implements View.OnClickListener {
      * @return A new instance of fragment ConsignOrder.
      */
     // TODO: Rename and change types and number of parameters
-    private LinearLayout choosebegindate,chooseenddate,choosetype,choosestatus;
+    private LinearLayout choosebegindate,chooseenddate,choosetype,choosestatus,activity;
     private TextView tv_begindate,tv_enddate,tv_type,tv_status;
     private Button bt_submit;
     private EditText et_cardnum;
@@ -137,6 +138,8 @@ public class ConsignOrder extends Fragment implements View.OnClickListener {
         tv_status= (TextView) view.findViewById(R.id.tv_consignorder_choosestatus);
         bt_submit= (Button) view.findViewById(R.id.bt_consignorder_submit);
         et_cardnum= (EditText) view.findViewById(R.id.et_consignorder_cardnum);
+        activity= (LinearLayout) view.findViewById(R.id.llayout_consignorder_activity);
+        activity.setOnClickListener(this);
         choosebegindate.setOnClickListener(this);
         chooseenddate.setOnClickListener(this);
         choosetype.setOnClickListener(this);
@@ -240,6 +243,11 @@ public class ConsignOrder extends Fragment implements View.OnClickListener {
                     }
                 }.start();
 
+                break;
+            case R.id.llayout_consignorder_activity:
+                InputMethodManager imm = (InputMethodManager)
+                        getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 break;
 
         }

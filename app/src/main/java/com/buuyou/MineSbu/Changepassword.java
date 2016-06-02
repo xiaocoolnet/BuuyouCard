@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,7 +24,7 @@ import org.json.JSONObject;
 
 public class Changepassword extends AppCompatActivity {
 
-    private LinearLayout back;
+    private LinearLayout back,activity;
     private Button sure;
     private EditText et_newpassword,et_againpassword,et_email,et_oldpassword;
     private String email,emailsure,oldpwd,newpwd,againnewpwd,result;
@@ -76,6 +77,7 @@ public class Changepassword extends AppCompatActivity {
         et_oldpassword= (EditText) findViewById(R.id.et_changepassword_oldpwd);
         et_newpassword= (EditText) findViewById(R.id.et_changepassword_newpwd);
         et_againpassword= (EditText) findViewById(R.id.et_changepassword_againnewpwd);
+        activity= (LinearLayout) findViewById(R.id.llayout_changepassword_activity);
         emailsure=sp.getString("email",null);
 
         sure.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +111,14 @@ public class Changepassword extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        activity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager)
+                        getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
         });
 

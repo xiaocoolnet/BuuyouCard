@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,7 +69,8 @@ public class ApplyforMoney extends Fragment implements View.OnClickListener {
     private EditText applyformoney,safecode;
     private Button submit;
     private String result;
-    private String result_bank,result_temp;
+    private String result_temp;
+    private LinearLayout activity;
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -93,23 +96,23 @@ public class ApplyforMoney extends Fragment implements View.OnClickListener {
                     break;
                 case 3:
                     try {
-                        JSONObject json1=new JSONObject(result_bank);//解析银行信息，取银行名
+//                        JSONObject json1=new JSONObject(result_bank);//解析银行信息，取银行名
                         JSONObject json2=new JSONObject(result_temp);//解析财务信息，取可用余额和可提现余额
-                        JSONArray temp1=json1.getJSONArray("data");
+//                        JSONArray temp1=json1.getJSONArray("data");
                         JSONArray temp2=json2.getJSONArray("data");
                         SharedPreferences.Editor editor=sp.edit();
-                        for(int i=0;i<temp1.length();i++){
-                            JSONObject data= (JSONObject) temp1.get(i);
-                            if(data.getString("BankID").equals(sp.getString("bankID",null))){
-                                editor.putString("bankname", data.getString("BankName"));
-
-                                editor.commit();
-                                Log.e("+++", sp.getString("bankname", null));
-                                bankname.setText(sp.getString("bankname", null));
-
-                            }
-
-                        }
+//                        for(int i=0;i<temp1.length();i++){
+//                            JSONObject data= (JSONObject) temp1.get(i);
+//                            if(data.getString("BankID").equals(sp.getString("bankID",null))){
+//                                editor.putString("bankname", data.getString("BankName"));
+//
+//                                editor.commit();
+//                                Log.e("+++", sp.getString("bankname", null));
+//                                bankname.setText(sp.getString("bankname", null));
+//
+//                            }
+//
+//                        }
                         for(int j=0;j<temp2.length();j++){
                             JSONObject data= (JSONObject) temp2.get(j);
                             editor.putString("availablemoney", data.getString("AvailableBalance"));
@@ -153,7 +156,7 @@ public class ApplyforMoney extends Fragment implements View.OnClickListener {
         new Thread(){
             public void run(){
                 if(myHttpConnect.isConnnected(getActivity())){
-                    result_bank=myHttpConnect.urlconnect_banklist(sp.getString("email", null), sp.getString("clearpwd", null));
+                   // result_bank=myHttpConnect.urlconnect_banklist(sp.getString("email", null), sp.getString("clearpwd", null));
                     result_temp=myHttpConnect.urlconnect_moneyinfo(sp.getString("email", null), sp.getString("clearpwd", null));
                     handler.sendEmptyMessage(3);
                 }
@@ -173,11 +176,12 @@ public class ApplyforMoney extends Fragment implements View.OnClickListener {
         availablemoney= (TextView) v.findViewById(R.id.tv_applyformoney_availablemoney);
         usermoney= (TextView) v.findViewById(R.id.tv_applyformoney_usermoney);
         submit= (Button) v.findViewById(R.id.bt_applyformoney_submit);
+        activity= (LinearLayout) v.findViewById(R.id.llayout_applyformoney_activity);
+        activity.setOnClickListener(this);
         bankaddress.setText(sp.getString("bankaddress",null));
         bankcard.setText(sp.getString("bankcard",null));
         bankaccount.setText(sp.getString("bankaccount", null));
         bankname.setText(sp.getString("bankname", null));
-
         availablemoney.setText(sp.getString("availablemoney",null));
         usermoney.setText(sp.getString("usermoney",null));
         submit.setOnClickListener(this);
@@ -247,6 +251,11 @@ public class ApplyforMoney extends Fragment implements View.OnClickListener {
                     Toast.makeText(getActivity(),"请输入完整数据!",Toast.LENGTH_SHORT).show();
                 }
 
+                break;
+            case R.id.llayout_applyformoney_activity:
+                InputMethodManager imm = (InputMethodManager)
+                        getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 break;
         }
     }

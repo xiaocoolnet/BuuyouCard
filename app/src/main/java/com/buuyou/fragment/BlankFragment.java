@@ -95,6 +95,7 @@ public class BlankFragment extends FragmentActivity {
                                 //记录用户输入的明文密码
                                 editor.putString("webname",temp.getString("WebName"));
                                 editor.putString("weburl",temp.getString("WebUrl"));
+                                editor.putString("bankname",temp.getString("BankName"));
                                 editor.commit();
                             }
                         }

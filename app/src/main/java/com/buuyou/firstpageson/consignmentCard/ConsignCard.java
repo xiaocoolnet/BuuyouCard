@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -74,7 +75,7 @@ public class ConsignCard extends Fragment implements View.OnClickListener {
     // TODO: Rename and change types and number of parameters
     private RefreshListView listView;
     private ImageView back;
-    private LinearLayout choose;
+    private LinearLayout choose,activity;
     private TextView tv_choosemoney;
     private TextView tv_cardno,tv_name,tv_status,tv_date,tv_ordermoney,tv_realmoney;
     private EditText et_cardnum,et_cardpwd;
@@ -233,7 +234,8 @@ public class ConsignCard extends Fragment implements View.OnClickListener {
         et_cardpwd= (EditText) view.findViewById(R.id.et_consigncard_cardpwd);
         commit= (Button) view.findViewById(R.id.bt_consignment_commit);
         tendata= (RelativeLayout) view.findViewById(R.id.rlayout_consignment_tendata);
-
+activity= (LinearLayout) view.findViewById(R.id.llayout_consigncard_activity);
+        activity.setOnClickListener(this);
         refrush.setOnClickListener(this);
         commit.setOnClickListener(this);
         listView.setAdapter(new Myadapter());
@@ -340,6 +342,11 @@ public class ConsignCard extends Fragment implements View.OnClickListener {
                         }
                     }
                 }.start();
+                break;
+            case R.id.llayout_consigncard_activity:
+                InputMethodManager imm = (InputMethodManager)
+                        getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 break;
         }
     }

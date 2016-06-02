@@ -2,7 +2,6 @@ package com.buuyou.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -79,6 +78,7 @@ Handler handler=new Handler(){
                             editor.putString("noticeweb", web);
                             editor.commit();
                             Log.e("+++", path);
+
                             /**
                              * 通过imageloader加载网络上的图片
                              */
@@ -140,6 +140,9 @@ Handler handler=new Handler(){
         SharedPreferences sp=getActivity().getSharedPreferences("data",Context.MODE_PRIVATE);
         email=sp.getString("email",null);
         password=sp.getString("clearpwd",null);
+        if(isAdded()){
+
+        }
         new Thread(){
             public void run(){
                 if(myHttpConnect.isConnnected(getActivity().getApplication())){
@@ -156,8 +159,6 @@ Handler handler=new Handler(){
             MyActivity.getIntent(getActivity(),Watchdetail.class);
         }
     });
-
-
         return view;
     }
 

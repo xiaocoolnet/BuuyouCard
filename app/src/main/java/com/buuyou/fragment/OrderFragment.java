@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -71,7 +72,7 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename and change types and number of parameters
     private RelativeLayout left,center,right;
     private TextView tv_left,tv_center,tv_right;
-    private LinearLayout leftline,centerline,rightline;
+    private LinearLayout leftline,centerline,rightline,activity;
     private LinearLayout choosetype,choosechannel,choosebegindate,chooseenddate;
     private TextView type,channel,begindate,enddate;
     private Button search;
@@ -174,6 +175,8 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
         search= (Button) view.findViewById(R.id.bt_fragmentorder_search);
         et_ordernum= (EditText) view.findViewById(R.id.et_fragmentorder_ordernum);
         et_cardnum= (EditText) view.findViewById(R.id.et_fragmentorder_cardnum);
+        activity= (LinearLayout) view.findViewById(R.id.llayout_fragmentorder_activity);
+        activity.setOnClickListener(this);
         left.setOnClickListener(this);
         center.setOnClickListener(this);
         right.setOnClickListener(this);
@@ -297,6 +300,11 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
                     }
                 }.start();
 
+                break;
+            case R.id.llayout_fragmentorder_activity:
+                InputMethodManager imm = (InputMethodManager)
+                        getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 break;
         }
     }

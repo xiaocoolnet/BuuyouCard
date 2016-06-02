@@ -74,14 +74,14 @@
             android:id="@+id/tv_security_safecode"
 
             />
-        <ImageView
-            android:layout_width="9dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/next"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:id="@+id/iv_security_safecode"
-            />
+        <!--<ImageView-->
+            <!--android:layout_width="9dp"-->
+            <!--android:layout_height="15dp"-->
+            <!--android:src="@mipmap/next"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:id="@+id/iv_security_safecode"-->
+            <!--/>-->
     </RelativeLayout>
 
     <RelativeLayout
@@ -112,14 +112,14 @@
             android:layout_marginLeft="20dp"
             android:id="@+id/tv_security_email"
             />
-        <ImageView
-            android:layout_width="9dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/next"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:id="@+id/iv_security_email"
-            />
+        <!--<ImageView-->
+            <!--android:layout_width="9dp"-->
+            <!--android:layout_height="15dp"-->
+            <!--android:src="@mipmap/next"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:id="@+id/iv_security_email"-->
+            <!--/>-->
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/safephone"
@@ -149,14 +149,14 @@
             android:textSize="15sp"
             android:layout_marginLeft="20dp"
             />
-        <ImageView
-            android:layout_width="9dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/next"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:id="@+id/iv_security_phone"
-            />
+        <!--<ImageView-->
+            <!--android:layout_width="9dp"-->
+            <!--android:layout_height="15dp"-->
+            <!--android:src="@mipmap/next"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:id="@+id/iv_security_phone"-->
+            <!--/>-->
     </RelativeLayout>
 
     <RelativeLayout
@@ -187,14 +187,14 @@
             android:textSize="15sp"
             android:layout_marginLeft="20dp"
             />
-        <ImageView
-            android:layout_width="9dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/next"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:id="@+id/iv_security_identity"
-            />
+        <!--<ImageView-->
+            <!--android:layout_width="9dp"-->
+            <!--android:layout_height="15dp"-->
+            <!--android:src="@mipmap/next"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:id="@+id/iv_security_identity"-->
+            <!--/>-->
     </RelativeLayout>
 
     <RelativeLayout
@@ -225,14 +225,14 @@
             android:textSize="15sp"
             android:layout_marginLeft="20dp"
             />
-        <ImageView
-            android:layout_width="9dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/next"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:id="@+id/iv_security_address"
-            />
+        <!--<ImageView-->
+            <!--android:layout_width="9dp"-->
+            <!--android:layout_height="15dp"-->
+            <!--android:src="@mipmap/next"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:id="@+id/iv_security_address"-->
+            <!--/>-->
     </RelativeLayout>
 
 
