@@ -54,7 +54,7 @@ public class FinanceFragment extends Fragment implements View.OnClickListener {
     private TextView tv_left,tv_center,tv_right;
     private LinearLayout leftline,centerline,rightline;
     private String status;
-
+    private SharedPreferences sp;
     public FinanceFragment() {
         // Required empty public constructor
     }
@@ -91,6 +91,7 @@ public class FinanceFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_finance, container, false);
+        sp=getActivity().getSharedPreferences("data",Context.MODE_PRIVATE);
         left= (RelativeLayout) view.findViewById(R.id.rlayout_finance_left);
         center= (RelativeLayout) view.findViewById(R.id.rlayout_finance_center);
         right= (RelativeLayout) view.findViewById(R.id.rlayout_finance_right);
@@ -137,6 +138,7 @@ public class FinanceFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        SharedPreferences.Editor editor=sp.edit();
         switch (v.getId()){
             case R.id.rlayout_finance_left:
                 init();
@@ -157,6 +159,8 @@ public class FinanceFragment extends Fragment implements View.OnClickListener {
                 ApplyforItem m2=new ApplyforItem();
                 t2.replace(R.id.fragment_finance, m2);
                 t2.commit();
+                editor.putString("withdraw", "0");
+                editor.commit();
                 break;
             case R.id.rlayout_finance_right:
                 init();
@@ -167,6 +171,8 @@ public class FinanceFragment extends Fragment implements View.OnClickListener {
                 ApplyforItem m3=new ApplyforItem();
                 t3.replace(R.id.fragment_finance, m3);
                 t3.commit();
+                editor.putString("withdraw", "2");
+                editor.commit();
                 break;
         }
     }

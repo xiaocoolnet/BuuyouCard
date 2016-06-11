@@ -140,9 +140,7 @@ Handler handler=new Handler(){
         SharedPreferences sp=getActivity().getSharedPreferences("data",Context.MODE_PRIVATE);
         email=sp.getString("email",null);
         password=sp.getString("clearpwd",null);
-        if(isAdded()){
 
-        }
         new Thread(){
             public void run(){
                 if(myHttpConnect.isConnnected(getActivity().getApplication())){

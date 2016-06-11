@@ -2,9 +2,11 @@ package com.buuyou.firstpageson.financemanage;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,13 +21,14 @@ public class Finance extends AppCompatActivity implements View.OnClickListener {
     private RelativeLayout left,center,right;
     private TextView tv_left,tv_center,tv_right;
     private LinearLayout leftline,centerline,rightline;
-    private String status;
+    private SharedPreferences sp;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finance);
+        sp=getSharedPreferences("data",MODE_PRIVATE);
         back= (ImageView) findViewById(R.id.iv_finance_back);
         left= (RelativeLayout) findViewById(R.id.rlayout_finance_left);
         center= (RelativeLayout) findViewById(R.id.rlayout_finance_center);
@@ -52,6 +55,7 @@ public class Finance extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        SharedPreferences.Editor editor=sp.edit();
         switch (v.getId()){
             case R.id.iv_finance_back:
                 finish();
@@ -65,26 +69,33 @@ public class Finance extends AppCompatActivity implements View.OnClickListener {
                 ApplyforMoney m1=new ApplyforMoney();
                 t.replace(R.id.fragment_finance, m1);
                 t.commit();
+
                 break;
             case R.id.rlayout_finance_center:
                 init();
                 tv_center.setTextColor(getResources().getColor(R.color.colororange));
                 centerline.setBackgroundColor(getResources().getColor(R.color.colororange));
+                editor.putString("withdraw", "0");
+                editor.commit();
                 FragmentManager fm2=getFragmentManager();
                 FragmentTransaction t2=fm2.beginTransaction();
                 ApplyforItem m2=new ApplyforItem();
                 t2.replace(R.id.fragment_finance, m2);
                 t2.commit();
+
                 break;
             case R.id.rlayout_finance_right:
                 init();
                 tv_right.setTextColor(getResources().getColor(R.color.colororange));
                 rightline.setBackgroundColor(getResources().getColor(R.color.colororange));
+                editor.putString("withdraw", "2");
+                editor.commit();
                 FragmentManager fm3=getFragmentManager();
                 FragmentTransaction t3=fm3.beginTransaction();
                 ApplyforItem m3=new ApplyforItem();
                 t3.replace(R.id.fragment_finance, m3);
                 t3.commit();
+
                 break;
         }
     }

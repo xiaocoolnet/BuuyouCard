@@ -301,82 +301,7 @@
             android:layout_marginRight="15dp"
             />
     </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#EAEAEA"
-        android:layout_marginLeft="15dp"></LinearLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#FFFFFF"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="提现金额"
-            android:textColor="#303030"
-            android:textSize="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_centerVertical="true"
-            android:id="@+id/tv_applyformoney_temp1"
-            />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="提现金额为整数"
-            android:layout_marginLeft="5dp"
-            android:gravity="right"
-            android:textSize="15dp"
-            android:background="@null"
-            android:textColor="#A2A2A2"
-            android:layout_toRightOf="@+id/tv_applyformoney_temp1"
-            android:layout_marginRight="15dp"
-            android:layout_centerVertical="true"
-            android:textCursorDrawable="@null"
-            android:id="@+id/et_applyformoney_money"
-            />
-    </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#EAEAEA"
-        android:layout_marginLeft="15dp"></LinearLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#FFFFFF"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="安全码"
-            android:textColor="#303030"
-            android:textSize="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_centerVertical="true"
-            android:id="@+id/tv_applyformoney_temp2"
-            />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="请输入安全码"
-            android:layout_marginLeft="5dp"
-            android:gravity="right"
-            android:textSize="15dp"
-            android:background="@null"
-            android:textColor="#A2A2A2"
-            android:layout_toRightOf="@+id/tv_applyformoney_temp2"
-            android:layout_marginRight="15dp"
-            android:layout_centerVertical="true"
-            android:textCursorDrawable="@null"
-            android:id="@+id/et_applyformoney_safecode"
-            />
-    </RelativeLayout>
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -384,7 +309,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:background="@drawable/button_shape"
-            android:text="提交"
+            android:text="提现"
             android:id="@+id/bt_applyformoney_submit"
             android:textColor="#FFFFFF"
             android:textSize="15dp"

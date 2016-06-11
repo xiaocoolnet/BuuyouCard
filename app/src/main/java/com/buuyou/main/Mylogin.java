@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +36,7 @@ public class Mylogin extends AppCompatActivity {
     String result_data;
     SharedPreferences sp;
     private String myphone;
+    private LinearLayout back;
     private LinearLayout activity;
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -85,6 +89,8 @@ public class Mylogin extends AppCompatActivity {
                                 editor.putString("webname",temp.getString("WebName"));
                                 editor.putString("weburl",temp.getString("WebUrl"));
                                 editor.putString("bankname",temp.getString("BankName"));
+                                //改变isboolean状态为false
+                                editor.putBoolean("isboolean", false);
                                 editor.commit();
                             }
                             finish();
@@ -114,37 +120,62 @@ public class Mylogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mylogin);
         sp = getSharedPreferences("data", Context.MODE_PRIVATE);
-
-        //定义状态b1，b1为true，进入登录界面，否则跳过登录界面
-        boolean bl = sp.getBoolean("isboolean",true);
-        //第一次进入应用
-        if (bl) {
-            init();
-        } else {
-            Intent intent = new Intent(Mylogin.this, BlankFragment.class);
-            startActivity(intent);
-            finish();
-        }
-    }
-
-
-    public void init() {
         findpassword = (TextView) findViewById(R.id.findpass);
         phone = (EditText) findViewById(R.id.phone);
         pass = (EditText) findViewById(R.id.pass);
         login = (Button) findViewById(R.id.login);
         activity= (LinearLayout) findViewById(R.id.activity_login);
+        back= (LinearLayout) findViewById(R.id.iv_login_back);
+
+        //设置EditText监听，当edittext数据改变，则改变button状态
+        phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!TextUtils.isEmpty(pass.getText().toString().trim())){
+                    login.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    login.setEnabled(true);
+                }
+            }
+        });
+        pass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!TextUtils.isEmpty(phone.getText().toString().trim())){
+                    login.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    login.setEnabled(true);
+                }
+            }
+        });
+
         login.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 //输入的账号和密码
                 myphone = phone.getText().toString().trim();
+                Log.e("+++++", myphone);
                 final String mypass = pass.getText().toString().trim();
-                //改变isboolean状态为false
-                SharedPreferences.Editor editor=sp.edit();
-                editor.putBoolean("isboolean", false);
-                editor.commit();
+
 
                 //判断账号格式是否正确 如果错误给出提示
                 new Thread(new Runnable() {
@@ -187,8 +218,15 @@ public class Mylogin extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
         });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
-
-
 }
+
+
+

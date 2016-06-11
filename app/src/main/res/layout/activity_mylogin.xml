@@ -4,121 +4,112 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.buuyou.buuyoucard.Mylogin"
-    android:background="@mipmap/logbac"
     android:orientation="vertical"
     android:id="@+id/activity_login"
     >
-    <!-- LOGO-->
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:layout_marginTop="58dp"
-    android:orientation="vertical"
-    >
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="86dp"
-        android:layout_height="75dp"
-        android:src="@mipmap/logo"
-        android:layout_centerHorizontal="true"
-        />
-    <ImageView
-        android:layout_below="@id/img"
-        android:layout_width="133dp"
-        android:layout_height="30dp"
-        android:src="@mipmap/text"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
-        />
-</RelativeLayout>
-    <!-- 账号输入框-->
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="45dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:orientation="horizontal"
-    android:layout_marginTop="50dp"
-    >
-<ImageView
-    android:layout_width="50dp"
-    android:layout_height="45dp"
-    android:src="@mipmap/loginuser"
-    />
-    <EditText
-        android:id="@+id/phone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/shape"
-        android:hint="请输入已验证的邮箱"
-        android:padding="10dp"
-        />
-</LinearLayout>
-     <!--密码输入框-->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:orientation="horizontal"
+        android:background="#FF9100"
         >
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="45dp"
-            android:src="@mipmap/pass"
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_login_back">
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/back"
+                />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="登录"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:id="@+id/tv_basicinfo_title"
+            android:layout_centerInParent="true"
             />
-        <EditText
-            android:id="@+id/pass"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/pass"
-            android:inputType="textPassword"
-            android:background="@drawable/shape"
-            android:padding="10dp"
-            />
-
-    </LinearLayout>
-    <!-- 登录按钮-->
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="15dp"
-        >
-       <Button
-           android:id="@+id/login"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:text="登  录"
-           android:textSize="18dp"
-           android:background="#FF9100"
-           android:textColor="#FFFFFF"
-           />
-    </LinearLayout>
-    <!-- 忘记密码提示-->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="14dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="40dp"
         android:orientation="horizontal"
+        android:layout_marginTop="10dp"
         >
-    <ImageView
-        android:layout_marginLeft="20dp"
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="21dp"
+            android:src="@mipmap/zhanghao_pic"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center_vertical"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:hint="请输入邮箱"
+            android:textSize="14dp"
+            android:textColor="#B4B4B4"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/phone"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="10dp"
+        android:background="#EAEAEB"></LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="17dp"
+            android:src="@mipmap/mima_pic"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center_vertical"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:hint="请输入密码"
+            android:textSize="14dp"
+            android:textColor="#B4B4B4"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/pass"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="10dp"
+        android:background="#EAEAEB"></LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="登录"
+        android:background="#FFBD66"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/login"
+        android:enabled="false"
+        />
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/forget"
-        />
-        <TextView
-
-            android:id="@+id/findpass"
-            android:clickable="true"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/forgetpass"
-            android:layout_marginLeft="9dp"
-            android:textSize="12sp"
-            />
-    </LinearLayout>
+        android:text="登录遇到问题？"
+        android:textSize="11dp"
+        android:textColor="#FF9100"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:id="@+id/findpass"/>
 </LinearLayout>

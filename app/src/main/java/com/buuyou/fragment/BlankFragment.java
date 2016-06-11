@@ -46,67 +46,6 @@ public class BlankFragment extends FragmentActivity {
     private TextView tv5;
     private SharedPreferences sp;
     private String result,result_temp,result_bank;
-    private Handler handler=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case 1:
-                    Toast.makeText(getApplication(),"网络连接错误",Toast.LENGTH_SHORT).show();
-                    break;
-                case 2:
-                    try {
-                        JSONObject json = new JSONObject(result);
-                        String status = json.getString("status");
-                        //登陆成功   status等于1
-                        if (status.equals("1")) {
-                            SharedPreferences.Editor editor = sp.edit();
-                            //获得json中的data数据
-                            JSONArray data = json.getJSONArray("data");
-
-                            for (int i = 0; i < data.length(); i++) {
-                                JSONObject temp = (JSONObject) data.get(i);
-                                Log.e("++++++", temp.toString());
-                                //得到“data”中各个值
-                                String userid = temp.getString("Userid");
-                                String username=temp.getString("UserRealName");
-                                String userphone=temp.getString("RealTel");
-                                String userQQ=temp.getString("MsnQQ");
-                                String password = temp.getString("PassWord");
-                                String lastTimes = temp.getString("LastTimes");
-                                String safeCode=temp.getString("SafeCode");
-                                String email=temp.getString("Email");
-                                String bankaccount=temp.getString("BankACCount");
-                                String bankcard=temp.getString("BankCard");
-                                String bankID=temp.getString("BankID");
-                                String bankAddress=temp.getString("BankMore");
-                                //将值通过sp放到data文件中
-                                editor.putString("userid", userid);
-                                editor.putString("password", password);
-                                editor.putString("email",email);
-                                editor.putString("lastTimes", lastTimes);
-                                editor.putString("name",username);
-                                editor.putString("phone",userphone);
-                                editor.putString("QQ",userQQ);
-                                editor.putString("safecode",safeCode);
-                                editor.putString("bankaccount",bankaccount);
-                                editor.putString("bankcard",bankcard);
-                                editor.putString("bankID",bankID);
-                                editor.putString("bankaddress",bankAddress);
-                                //记录用户输入的明文密码
-                                editor.putString("webname",temp.getString("WebName"));
-                                editor.putString("weburl",temp.getString("WebUrl"));
-                                editor.putString("bankname",temp.getString("BankName"));
-                                editor.commit();
-                            }
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-
-            }
-        }
-    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,16 +83,6 @@ public class BlankFragment extends FragmentActivity {
                 FirstpageFragment fm_first = new FirstpageFragment();
                 t.replace(R.id.fragment_content, fm_first);
                 t.commit();
-                new Thread() {
-                    public void run() {
-                        if (myHttpConnect.isConnnected(getApplication())) {
-                            //如果网络连接，调用myHttpConect的urlconnect方法
-                            result = myHttpConnect.urlconnect(sp.getString("email", null), sp.getString("clearpwd", null));
-                            handler.sendEmptyMessage(2);
-
-                        }
-                    }
-                }.start();
             }
         });
         rlayout_order.setOnClickListener(new View.OnClickListener() {
@@ -167,16 +96,6 @@ public class BlankFragment extends FragmentActivity {
                 OrderFragment fm_order = new OrderFragment();
                 t.replace(R.id.fragment_content, fm_order);
                 t.commit();
-                new Thread() {
-                    public void run() {
-                        if (myHttpConnect.isConnnected(getApplication())) {
-                            //如果网络连接，调用myHttpConect的urlconnect方法
-                            result = myHttpConnect.urlconnect(sp.getString("email", null), sp.getString("clearpwd", null));
-                            handler.sendEmptyMessage(2);
-
-                        }
-                    }
-                }.start();
             }
         });
         rlayout_finance.setOnClickListener(new View.OnClickListener() {
@@ -191,18 +110,7 @@ public class BlankFragment extends FragmentActivity {
                 FinanceFragment fm_finance = new FinanceFragment();
                 t.replace(R.id.fragment_content, fm_finance);
                 t.commit();
-                new Thread(){
-                    public void run(){
-                        if(myHttpConnect.isConnnected(getApplication())){
-                            result = myHttpConnect.urlconnect(sp.getString("email", null), sp.getString("clearpwd", null));
-                            handler.sendEmptyMessage(2);
-                        }
-                        else{
-                            //网络连接错误
-                            handler.sendEmptyMessage(1);
-                        }
-                    }
-                }.start();
+
             }
         });
         rlayout_notice.setOnClickListener(new View.OnClickListener() {
@@ -216,15 +124,7 @@ public class BlankFragment extends FragmentActivity {
                 noticeFragment fm_notice = new noticeFragment();
                 t.replace(R.id.fragment_content, fm_notice);
                 t.commit();
-                new Thread(){
-                    public void run(){
-                        if (myHttpConnect.isConnnected(getApplication())) {
-                            //如果网络连接，调用myHttpConect的urlconnect方法
-                            result = myHttpConnect.urlconnect(sp.getString("email",null), sp.getString("clearpwd",null));
-                            handler.sendEmptyMessage(2);
-                        }
-                    }
-                }.start();
+
             }
         });
         rlayout_mine.setOnClickListener(new View.OnClickListener() {
@@ -238,16 +138,7 @@ public class BlankFragment extends FragmentActivity {
                 mineFragment fm_mine=new mineFragment();
                 t.replace(R.id.fragment_content,fm_mine);
                 t.commit();
-                new Thread(){
-                    public void run(){
-                        if (myHttpConnect.isConnnected(getApplication())) {
-                            //如果网络连接，调用myHttpConect的urlconnect方法
-                            result = myHttpConnect.urlconnect(sp.getString("email",null), sp.getString("clearpwd",null));
-                            handler.sendEmptyMessage(2);
 
-                        }
-                    }
-                }.start();
             }
         });
     }

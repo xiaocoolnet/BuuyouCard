@@ -97,6 +97,13 @@ public class myHttpConnect {
         Log.e("log:",urlresult);
         return urlresult;
     }
+    //通道信息
+    public static String urlconnect_channellist(String email,String password){
+        String url=UrlPath.NET_API+UrlPath.channellistType+UrlPath.data+email+","+password;
+        String urlresult=HttpResult(url);
+        Log.e("log:",urlresult);
+        return urlresult;
+    }
     //通道收入分析
     public static String urlconnect_channelanalyse(String email,String password,String begintime,String endtime){
         String url=UrlPath.NET_API+UrlPath.channelanalyseType+UrlPath.data+email+","+password+","+begintime+","+endtime;
@@ -140,8 +147,8 @@ public class myHttpConnect {
         return urlresult;
     }
     //提现查询
-    public static String urlconnect_findmoney(String email,String password,String status){
-        String url=UrlPath.NET_API+UrlPath.userwithdrawType+UrlPath.data+email+","+password+","+status;
+    public static String urlconnect_withdrawsearch(String email,String password,String status){
+        String url=UrlPath.NET_API+UrlPath.withdrawsearchType+UrlPath.data+email+","+password+","+status;
         String urlresult=HttpResult(url);
         Log.e("log:",urlresult);
         return urlresult;
@@ -160,6 +167,7 @@ public class myHttpConnect {
         Log.e("log:",urlresult);
         return urlresult;
     }
+
 
 //连接服务器
     public static String HttpResult(String url) {

@@ -19,7 +19,9 @@ public class UrlPath {
     public final static String safecenterType="safeinfo";//安全信息
     public final static String banklistType="banklist";//银行信息
     public final static String userwithdrawType="userwithdraw";//提现信息
+    public final static String withdrawsearchType="withdrawsearch";//提现查询
     public final static String changebasicinfoType="userbasicinfo";//修改基本信息
     public final static String changeaccountinfoType="bankinfo";//修改账户信息
+    public final static String channellistType="channellist";//通道信息
     public  final static String data="&data=";
 }

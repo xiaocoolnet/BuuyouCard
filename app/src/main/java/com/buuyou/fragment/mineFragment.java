@@ -26,6 +26,7 @@ import com.buuyou.MineSbu.LoginLog;
 import com.buuyou.MineSbu.SafeCenter;
 import com.buuyou.MineSbu.Updata;
 import com.buuyou.buuyoucard.R;
+import com.buuyou.main.Main;
 import com.buuyou.main.Mylogin;
 import com.buuyou.MineSbu.Changepassword;
 import com.buuyou.other.MyActivity;
@@ -192,9 +193,8 @@ public class mineFragment extends Fragment implements View.OnClickListener {
                 final SharedPreferences.Editor editor=sp.edit();
                 editor.putBoolean("isboolean", true);
                 editor.commit();
-                Intent intent9=new Intent(getActivity().getApplication(), Mylogin.class);
-                startActivity(intent9);
-                mineFragment.this.getActivity().finish();
+                MyActivity.getIntent(getActivity(), Main.class);
+                getActivity().finish();
                 break;
 
         }

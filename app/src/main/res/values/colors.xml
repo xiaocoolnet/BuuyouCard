@@ -11,6 +11,8 @@
     <color name="failordercolor">#A40000</color>
     <color name="textcolor64">#646464</color>
     <color name="safecenter_wei">#FF0000</color>
+    <color name="beforelogin">#FFBD66</color>
+    <color name="applyformoneysuccess">#009944</color>
 
 
 </resources>

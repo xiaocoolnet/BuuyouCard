@@ -2,17 +2,31 @@ package com.buuyou.firstpageson.financemanage;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.buuyou.HttpConnect.myHttpConnect;
 import com.buuyou.buuyoucard.R;
+import com.buuyou.other.MyActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +48,47 @@ public class ApplyforItem extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private ListView listView;
+    private int num=0;
+    private String result;
+    private SharedPreferences sp;
+    private TextView withdrawid,time,money,status;
+    List<String> str_id=new ArrayList<>();
+    List<String> str_time=new ArrayList<>();
+    List<String> str_money=new ArrayList<>();
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 1:
+                    Toast.makeText(getActivity(),"网络连接错误",Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+                    try {
+                        str_money.clear();
+                        str_time.clear();
+                        str_id.clear();
+                        JSONObject json=new JSONObject(result);
+                        if(json.getString("status").equals("1")){
+                            JSONArray data=json.getJSONArray("data");
+                            num=data.length();
+                            for(int i=0;i<num;i++){
+                                JSONObject array= (JSONObject) data.get(i);
+                                str_id.add(array.getString("WithdrawID"));
+                                str_time.add(MyActivity.getTime(array.getString("WithdrawAddtime")));
+                                str_money.add(array.getString("WithdrawMoney"));
+                            }
+                            listView = (ListView) getActivity().findViewById(R.id.lv_applyforitem);
+                            listView.setAdapter(new MyAdapter());
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+            }
+        }
+    };
+
+
     public ApplyforItem() {
         // Required empty public constructor
     }
@@ -69,15 +124,27 @@ public class ApplyforItem extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_applyforitem,container,false);
-        listView = (ListView) v.findViewById(R.id.lv_applyforitem);
-        listView.setAdapter(new MyAdapter());
+        sp=getActivity().getSharedPreferences("data",Context.MODE_PRIVATE);
+        new Thread(){
+            public void run(){
+                if (myHttpConnect.isConnnected(getActivity())){
+                    result=myHttpConnect.urlconnect_withdrawsearch(sp.getString("email",null),sp.getString("clearpwd",null),sp.getString("withdraw",null));
+                    handler.sendEmptyMessage(2);
+                }else{
+                    handler.sendEmptyMessage(1);
+                }
+            }
+        }.start();
+
+
+
         return v;
     }
     public class MyAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
-            return 2;
+            return num;
         }
 
         @Override
@@ -93,6 +160,22 @@ public class ApplyforItem extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = View.inflate(getActivity(), R.layout.listview_applyforitem, null);
+            withdrawid= (TextView) view.findViewById(R.id.tv_applyforitem_withdrawid);
+            time= (TextView) view.findViewById(R.id.tv_applyforitem_time);
+            money= (TextView) view.findViewById(R.id.tv_applyforitem_money);
+            status= (TextView) view.findViewById(R.id.tv_applyforitem_status);
+            if(sp.getString("withdraw",null).equals("2")){
+                status.setText("已提现");
+                status.setTextColor(view.getResources().getColor(R.color.applyformoneysuccess));
+            }
+            for(int i=0;i<num;i++){
+                if(position==i){
+                    withdrawid.setText(str_id.get(i));
+                    time.setText(str_time.get(i));
+                    money.setText(str_money.get(i));
+
+                }
+            }
             return view;
         }
     }

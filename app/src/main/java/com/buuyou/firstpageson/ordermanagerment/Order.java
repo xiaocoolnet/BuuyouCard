@@ -29,6 +29,7 @@ import com.buuyou.other.Dropdown;
 import com.buuyou.other.MyActivity;
 import com.echo.holographlibrary.Line;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -46,16 +47,14 @@ public class Order extends AppCompatActivity implements View.OnClickListener {
     private TextView type,channel,begindate,enddate;
     private Button search;
     private EditText et_ordernum,et_cardnum;
-    private String result;
+    private String result,result_channel;
     String endtime = null;
     private SharedPreferences sp;
     private int orderstatus=1;
-    String ordertype;
+    String ordertype,channelid;
     List<String> str=new ArrayList<String>();
     String a[]={"所有类型","网银","点卡","支付宝","财付通","微信"};
-    String b[]={"所有通道","网银通道","骏网一卡通","盛大卡","神州行","征途卡","QQ卡","联通卡", "久游卡",
-            "网易卡","完美卡","搜狐卡","电信卡","纵游一卡通","天下一卡通","天宏一卡通","盛付通卡", "光宇一卡通",
-            "京东E卡通","中石化加油卡","微信扫码","支付宝余额","财付通余额","手机支付宝","手机财付通","手机微信",};
+
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -98,10 +97,31 @@ public class Order extends AppCompatActivity implements View.OnClickListener {
                 case 3:
                     Toast.makeText(getApplication(),"网络连接错误",Toast.LENGTH_SHORT).show();
                     break;
+                case 4:
+                    try {
+                        str.clear();
+                        JSONObject json=new JSONObject(result_channel);
+                        str.add(0,"所有通道");
+                        if(json.getString("status").equals("1")){
+                            JSONArray array=json.getJSONArray("data");
+                            for(int i=0;i<array.length();){
+                                JSONObject data= (JSONObject) array.get(i);
+                                str.add(++i, data.getString("ChannelName"));
+
+                            }
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    break;
             }
         }
     };
-        @Override
+    private String email;
+    private String pwd;
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
@@ -115,7 +135,7 @@ public class Order extends AppCompatActivity implements View.OnClickListener {
             centerline= (LinearLayout) findViewById(R.id.llayout_order_centerline);
             rightline= (LinearLayout) findViewById(R.id.llayout_order_rightline);
             back= (ImageView) findViewById(R.id.iv_order_back);
-activity= (LinearLayout) findViewById(R.id.llayout_order_activity);
+            activity= (LinearLayout) findViewById(R.id.llayout_order_activity);
             sp=getSharedPreferences("data", Context.MODE_PRIVATE);
             choosetype= (LinearLayout) findViewById(R.id.llayout_order_choosetype);
             choosechannel= (LinearLayout) findViewById(R.id.llayout_order_choosechannel);
@@ -138,6 +158,18 @@ activity= (LinearLayout) findViewById(R.id.llayout_order_activity);
             choosebegindate.setOnClickListener(this);
             chooseenddate.setOnClickListener(this);
             activity.setOnClickListener(this);
+            email=sp.getString("email",null);
+            pwd=sp.getString("clearpwd", null);
+            new Thread(){
+                public void run(){
+                    if(myHttpConnect.isConnnected(getApplication())){
+                        result_channel=myHttpConnect.urlconnect_channellist(email,pwd);
+                        handler.sendEmptyMessage(4);
+                    }else{
+                        handler.sendEmptyMessage(3);
+                    }
+                }
+            }.start();
     }
 
     @Override
@@ -174,10 +206,6 @@ activity= (LinearLayout) findViewById(R.id.llayout_order_activity);
                 Dropdown.dropdown(type,getApplicationContext(),str);
                 break;
             case R.id.llayout_order_choosechannel:
-                str.clear();
-                for(int j=0;j<b.length;j++){
-                    str.add(b[j]);
-                }
                 Dropdown.dropdown(channel, getApplicationContext(), str);
                 break;
             case R.id.llayout_order_begindate:
@@ -187,8 +215,7 @@ activity= (LinearLayout) findViewById(R.id.llayout_order_activity);
                 Dropdown.choosedate(enddate,Order.this);
                 break;
             case R.id.bt_order_search:
-                final String email=sp.getString("email",null);
-                final String pwd=sp.getString("clearpwd", null);
+
                 final String begintime=MyActivity.getBegindate(begindate);
 
                 final String ordernum=et_ordernum.getText().toString().trim();
@@ -211,16 +238,22 @@ activity= (LinearLayout) findViewById(R.id.llayout_order_activity);
                 }else{
                     endtime=MyActivity.getEnddate(enddate);
                 }
+                if(channel.getText().toString().equals("所有通道")){
+                    channelid="";
+                }else{
+                    for(int i=1;i<str.size();i++){
+                        if(channel.getText().toString().equals(str.get(i)))
+                            channelid=i+"";
+                    }
+                }
 
-                Log.e("+++", orderstatus + "");
                 new Thread(){
                     public void run(){
                         if(begindate.getText().toString().equals("选择日期")){
                             handler.sendEmptyMessage(1);
                         }else{
                             if (myHttpConnect.isConnnected(getApplication())) {
-                                //点单编号记得改回来！！！！
-                                result=myHttpConnect.urlconnect_ordermanage(email, pwd, begintime, endtime, ordernum, ordertype, "", cardnum, orderstatus, 1);
+                                result=myHttpConnect.urlconnect_ordermanage(email, pwd, begintime, endtime, ordernum, ordertype, channelid, cardnum, orderstatus, 1);
                                 handler.sendEmptyMessage(2);
 
                             } else {

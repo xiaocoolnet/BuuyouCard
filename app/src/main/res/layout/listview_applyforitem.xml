@@ -5,7 +5,7 @@
 
 
     <TextView
-        android:id="@+id/text_title"
+        android:id="@+id/tv_applyforitem_withdrawid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -14,7 +14,7 @@
         android:textColor="#000000"
         android:textSize="15dp"/>
     <TextView
-        android:id="@+id/text_time"
+        android:id="@+id/tv_applyforitem_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -23,11 +23,11 @@
         android:text="2016-04-08 16:43"
         android:textSize="11sp" />
     <TextView
-        android:id="@+id/subnum"
+        android:id="@+id/tv_applyforitem_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@id/text_time"
-        android:layout_below="@id/text_time"
+        android:layout_alignRight="@id/tv_applyforitem_time"
+        android:layout_below="@id/tv_applyforitem_time"
         android:layout_marginTop="17dp"
         android:text="提现中"
         android:textSize="13sp"
@@ -75,11 +75,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2.01元"
+        android:text="2元"
         android:layout_toRightOf="@id/tv_applyforitem_temp2"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"
         android:textSize="12sp"
         android:textColor="#303030"
+        android:id="@+id/tv_applyforitem_othermoney"
         />
 </RelativeLayout>

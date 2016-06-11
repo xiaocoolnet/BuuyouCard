@@ -24,6 +24,7 @@ import com.buuyou.buuyoucard.R;
 import com.buuyou.other.Dropdown;
 import com.buuyou.other.MyActivity;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -49,6 +50,7 @@ public class ConsignOrder extends Fragment implements View.OnClickListener {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private String channelid;
 
     public ConsignOrder() {
         // Required empty public constructor
@@ -67,11 +69,9 @@ public class ConsignOrder extends Fragment implements View.OnClickListener {
     private TextView tv_begindate,tv_enddate,tv_type,tv_status;
     private Button bt_submit;
     private EditText et_cardnum;
-    private String email,pwd,result;
+    private String email,pwd,result,result_channel;
     SharedPreferences sp;
-    String a[]={"所有类型","骏网一卡通","盛大卡","神州行", "征途卡", "QQ卡", "联通卡",
-            "久游卡", "网易卡","完美卡","搜狐卡","电信卡", "纵游一卡通", "天下一卡通",
-            "天宏一卡通","盛付通卡", "光宇一卡通", "京东E卡通","中石化加油卡"};
+
     String b[]={"所有状态","处理中","成功","失败"};
     List<String> str=new ArrayList<String>();
     Handler handler=new Handler(){
@@ -98,6 +98,24 @@ public class ConsignOrder extends Fragment implements View.OnClickListener {
                     break;
                 case 3:
                     Toast.makeText(getActivity().getApplication(), "请选择开始日期", Toast.LENGTH_SHORT).show();
+                    break;
+                case 4:
+                    try {
+                        str.clear();
+                        JSONObject json=new JSONObject(result_channel);
+                        str.add(0,"所有通道");
+                        if(json.getString("status").equals("1")){
+                            JSONArray array=json.getJSONArray("data");
+                            for(int i=0;i<array.length();){
+                                JSONObject data= (JSONObject) array.get(i);
+                                str.add(++i, data.getString("ChannelName"));
+
+                            }
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     break;
             }
         }
@@ -145,6 +163,16 @@ public class ConsignOrder extends Fragment implements View.OnClickListener {
         choosetype.setOnClickListener(this);
         choosestatus.setOnClickListener(this);
         bt_submit.setOnClickListener(this);
+        new Thread(){
+            public void run(){
+                if(myHttpConnect.isConnnected(getActivity())){
+                    result_channel=myHttpConnect.urlconnect_channellist(email,pwd);
+                    handler.sendEmptyMessage(4);
+                }else{
+                    handler.sendEmptyMessage(1);
+                }
+            }
+        }.start();
         return view;
     }
 
@@ -182,11 +210,6 @@ public class ConsignOrder extends Fragment implements View.OnClickListener {
                 Dropdown.choosedate(tv_enddate,getActivity());
                 break;
             case R.id.llayout_consignorder_choosetype:
-                //清空list数组
-                str.clear();
-                for(int i=0;i<a.length;i++){
-                    str.add(a[i]);
-                }
                 //调用Dropdown类中的dropdown函数，实现下拉菜单
                 Dropdown.dropdown(tv_type, getActivity().getApplicationContext(), str);
                 break;
@@ -229,7 +252,16 @@ public class ConsignOrder extends Fragment implements View.OnClickListener {
                                     str_endtime=MyActivity.getEnddate(tv_enddate);
                                 }
                                 Log.e("+++++++", str_begintime + "----" + str_endtime);
-                                result=myHttpConnect.urlconnect_ordermanage(email, pwd, str_begintime, str_endtime, "", "", "", str_num,statusid,1);
+                                if(tv_type.getText().toString().equals("所有通道")){
+                                    channelid="";
+                                }else{
+                                    for(int i=1;i<str.size();i++){
+                                        if(tv_type.getText().toString().equals(str.get(i)))
+                                            channelid=i+"";
+                                    }
+                                }
+
+                                result=myHttpConnect.urlconnect_ordermanage(email, pwd, str_begintime, str_endtime, "", "", channelid, str_num,statusid,1);
                                 editor.putString("result", result);
                                 editor.commit();
                                 handler.sendEmptyMessage(2);

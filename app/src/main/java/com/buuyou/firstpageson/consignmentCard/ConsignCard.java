@@ -130,7 +130,8 @@ public class ConsignCard extends Fragment implements View.OnClickListener {
                             }
                         }
                         if(flag&&status_order.equals("1")){
-                            tendata.setVisibility(View.VISIBLE);
+//                            //显示十条数据
+//                            tendata.setVisibility(View.VISIBLE);
                             JSONArray temp=json_order.getJSONArray("data");
                             item=temp.length();
                             for(int i=0;i<temp.length();i++){
@@ -238,7 +239,7 @@ activity= (LinearLayout) view.findViewById(R.id.llayout_consigncard_activity);
         activity.setOnClickListener(this);
         refrush.setOnClickListener(this);
         commit.setOnClickListener(this);
-        listView.setAdapter(new Myadapter());
+//        listView.setAdapter(new Myadapter());
 
         choose.setOnClickListener(this);
 

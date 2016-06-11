@@ -13,13 +13,7 @@
         android:label="布优点卡"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.buuyou.main.Mylogin">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="com.buuyou.main.Mylogin" />
         <activity android:name="com.buuyou.main.Findpassword" />
         <activity android:name="com.buuyou.fragment.BlankFragment" />
         <activity android:name="com.buuyou.MineSbu.BasicInfo" />
@@ -46,7 +40,15 @@
         <activity android:name="com.buuyou.firstpageson.ordermanagerment.OrderSearch_success" />
         <activity android:name="com.buuyou.firstpageson.ordermanagerment.OrderSearch_fail" />
         <activity android:name="com.buuyou.firstpageson.ordermanagerment.OrderSearching" />
-        <activity android:name="com.buuyou.firstpageson.financemanage.Finance"></activity>
+        <activity android:name="com.buuyou.firstpageson.financemanage.Finance" />
+        <activity android:name="com.buuyou.main.Main">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.buuyou.firstpageson.financemanage.Inputmoney"></activity>
     </application>
 
 </manifest>
