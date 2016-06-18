@@ -87,7 +87,11 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
     private int orderstatus=1;
     String ordertype;
     List<String> str=new ArrayList<String>();
+    List<String> strchannel=new ArrayList<String>();
     String a[]={"所有类型","网银","点卡","支付宝","财付通","微信"};
+    String b[]={"所有通道","网银通道","骏网一卡通","盛大卡","神州行","征途卡","QQ卡","联通卡", "久游卡",
+            "网易卡","完美卡","搜狐卡","电信卡","纵游一卡通","天下一卡通","天宏一卡通","盛付通卡", "光宇一卡通",
+            "京东E卡通","中石化加油卡","微信扫码","支付宝余额","财付通余额","手机支付宝","手机财付通","手机微信",};
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -132,14 +136,14 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
                     break;
                 case 4:
                     try {
-                        str.clear();
+                        strchannel.clear();
                         JSONObject json=new JSONObject(result_channel);
-                        str.add(0,"所有通道");
+                        strchannel.add(0,"所有通道");
                         if(json.getString("status").equals("1")){
                             JSONArray array=json.getJSONArray("data");
                             for(int i=0;i<array.length();){
                                 JSONObject data= (JSONObject) array.get(i);
-                                str.add(++i, data.getString("ChannelName"));
+                                strchannel.add(++i, data.getString("ChannelName"));
 
                             }
 
@@ -274,6 +278,10 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
                 Dropdown.dropdown(type, getActivity(), str);
                 break;
             case R.id.llayout_fragmentorder_choosechannel:
+                str.clear();
+                for(int i=0;i<b.length;i++){
+                    str.add(b[i]);
+                }
                 Dropdown.dropdown(channel, getActivity(), str);
                 break;
             case R.id.llayout_fragmentorder_begindate:
@@ -309,8 +317,8 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
                 if(channel.getText().toString().equals("所有通道")){
                     channelid="";
                 }else{
-                    for(int i=1;i<str.size();i++){
-                        if(channel.getText().toString().equals(str.get(i)))
+                    for(int i=1;i<strchannel.size();i++){
+                        if(channel.getText().toString().equals(strchannel.get(i)))
                             channelid=i+"";
                     }
                 }

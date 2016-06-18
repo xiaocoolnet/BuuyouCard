@@ -71,9 +71,12 @@ public class ConsignOrder extends Fragment implements View.OnClickListener {
     private EditText et_cardnum;
     private String email,pwd,result,result_channel;
     SharedPreferences sp;
-
+    String a[]={"所有通道","网银通道","骏网一卡通","盛大卡","神州行","征途卡","QQ卡","联通卡", "久游卡",
+            "网易卡","完美卡","搜狐卡","电信卡","纵游一卡通","天下一卡通","天宏一卡通","盛付通卡", "光宇一卡通",
+            "京东E卡通","中石化加油卡","微信扫码","支付宝余额","财付通余额","手机支付宝","手机财付通","手机微信",};
     String b[]={"所有状态","处理中","成功","失败"};
     List<String> str=new ArrayList<String>();
+    List<String> strchannel=new ArrayList<String>();
     Handler handler=new Handler(){
         public void handleMessage(Message msg){
             switch (msg.what){
@@ -101,14 +104,14 @@ public class ConsignOrder extends Fragment implements View.OnClickListener {
                     break;
                 case 4:
                     try {
-                        str.clear();
+                        strchannel.clear();
                         JSONObject json=new JSONObject(result_channel);
-                        str.add(0,"所有通道");
+                        strchannel.add(0,"所有通道");
                         if(json.getString("status").equals("1")){
                             JSONArray array=json.getJSONArray("data");
                             for(int i=0;i<array.length();){
                                 JSONObject data= (JSONObject) array.get(i);
-                                str.add(++i, data.getString("ChannelName"));
+                                strchannel.add(++i, data.getString("ChannelName"));
 
                             }
 
@@ -210,6 +213,10 @@ public class ConsignOrder extends Fragment implements View.OnClickListener {
                 Dropdown.choosedate(tv_enddate,getActivity());
                 break;
             case R.id.llayout_consignorder_choosetype:
+                str.clear();
+                for(int i=0;i<a.length;i++){
+                    str.add(a[i]);
+                }
                 //调用Dropdown类中的dropdown函数，实现下拉菜单
                 Dropdown.dropdown(tv_type, getActivity().getApplicationContext(), str);
                 break;
@@ -255,8 +262,8 @@ public class ConsignOrder extends Fragment implements View.OnClickListener {
                                 if(tv_type.getText().toString().equals("所有通道")){
                                     channelid="";
                                 }else{
-                                    for(int i=1;i<str.size();i++){
-                                        if(tv_type.getText().toString().equals(str.get(i)))
+                                    for(int i=1;i<strchannel.size();i++){
+                                        if(tv_type.getText().toString().equals(strchannel.get(i)))
                                             channelid=i+"";
                                     }
                                 }
